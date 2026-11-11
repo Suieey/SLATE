@@ -1,6 +1,6 @@
 # Contract Examples (DRAFT)
 
-Status: draft. Sample request/response payloads for each endpoint in the proposed API contracts. Those contracts are a draft dependency, not on main yet: they live on branch `docs/api-contracts-draft` (https://github.com/sarthak0116/slate/compare/main...docs/api-contracts-draft). If the contract changes, update these examples in the same PR. Use these exact payloads as frontend mock data until the backend exists.
+Status: draft. Sample request/response payloads for each endpoint in the API contracts in `contracts/`. If a contract changes, update these examples with it.
 
 ## Resume
 

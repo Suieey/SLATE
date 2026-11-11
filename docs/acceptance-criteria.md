@@ -2,7 +2,7 @@
 
 Status: draft for team review. Defines what "done" means for the 24-hour build.
 
-Depends on the proposed API contracts, which are not on main yet: they live on branch `docs/api-contracts-draft` (https://github.com/sarthak0116/slate/compare/main...docs/api-contracts-draft). This spec follows those draft shapes; if the contract proposal changes, update this in the same review round.
+Depends on the API contracts in `contracts/`. This spec follows those shapes; if a contract changes, update this document with it.
 
 Product surfaces: website, CLI, and mobile frontend are all required. How much depth fits the 24-hour window across all three is unresolved and is the owner's scoping call, not decided in this doc.
 
