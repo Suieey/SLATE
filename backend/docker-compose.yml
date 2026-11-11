@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    container_name: slate_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: slate_user
+      POSTGRES_PASSWORD: slate_password
+      POSTGRES_DB: slate_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
