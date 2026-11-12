@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slate · Mock Interview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+(()=>{let theme;try{theme=localStorage.getItem('slate_theme')}catch(_){}if(theme!=="light"&&theme!=="dark")theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=theme})();
+</script>
+<style>
+:root{--navy:#14213d;--navy2:#1d2f55;--blue:#2b5fe3;--blue-ink:#1e4fd0;--blue-soft:#edf2fd;--ink:#131b2e;--mut:#5b6678;--line:#e4e8f0;--soft:#f5f7fb;--card:#fff;--bad:#b3261e;--warn:#8a5a00;--ok:#1e4fd0;--good:#176b42;--radius:16px;--shadow:0 1px 2px rgba(16,24,40,.05),0 6px 20px rgba(16,24,40,.04)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--soft);-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:28px;padding:0 32px;height:64px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:-.03em;flex:none}
+.brand:hover{text-decoration:none}
+.brand span{color:var(--blue)}
+.nav{display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav::-webkit-scrollbar{display:none}
+.nlink{flex:none;padding:7px 12px;border-radius:8px;color:var(--mut);font-size:14px;font-weight:500;white-space:nowrap}
+.nlink:hover{color:var(--navy);background:var(--soft);text-decoration:none}
+.nlink.active{color:var(--blue-ink);background:var(--blue-soft);font-weight:600}
+.content{max-width:920px;margin:0 auto;padding:40px 32px 72px;min-width:0}
+.pagehead{margin:0 0 28px}
+.pagehead h1{font-size:32px;line-height:1.15;margin:0 0 10px;color:var(--navy);letter-spacing:-.03em;font-weight:750}
+.pagehead h1 .hsub{font-size:15px;color:var(--mut);font-weight:500;letter-spacing:0}
+.flowline{font-size:13.5px;color:var(--mut);margin:14px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+.flowline b{color:var(--navy);font-weight:600}
+p.sub{color:var(--mut);margin:0;font-size:15px;max-width:70ch}
+section,.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin:0 0 18px}
+section.off{opacity:.45;pointer-events:none}
+h2{font-size:17px;margin:0 0 14px;color:var(--navy);font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h2 b{flex:none;display:inline-block;width:24px;height:24px;border-radius:8px;background:var(--navy);color:#fff;text-align:center;font-size:12.5px;line-height:24px;font-weight:600}
+h3{font-size:14.5px;color:var(--navy)}
+textarea{width:100%;min-height:130px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);background:#fbfcfe;resize:vertical;transition:border-color .15s,box-shadow .15s}
+textarea:focus,input:focus,select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(43,95,227,.14)}
+select{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fff;max-width:100%}
+input[type=text],input[type=email],input:not([type]){font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fbfcfe;transition:border-color .15s,box-shadow .15s}
+label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin:14px 0 5px}
+.draftgrid>div{min-width:0}
+.draftgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.draftgrid label:first-child{margin-top:0}
+#targetWorkspace input{width:100%;min-width:0}
+button{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;margin:8px 8px 0 0;transition:background .15s,border-color .15s}
+button:hover{background:var(--navy2)}
+button.sec,button.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}
+button.sec:hover,button.secondary:hover{border-color:var(--navy);background:var(--soft)}
+button:disabled{opacity:.35;cursor:not-allowed}
+.toolrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:4px 0 8px}
+.toolrow button{margin:0}
+.toolrow select{flex:1 1 220px;min-width:0}
+.note{color:var(--mut);font-size:13px;margin:6px 0 8px}
+.msg{margin-top:8px;font-size:14px;overflow-wrap:anywhere}
+.upl{font-size:13px;color:var(--mut)}
+input[type=file]{max-width:230px;font-size:12.5px}
+.bad{color:var(--bad)}
+.ok{color:var(--ok)}
+.dirty{color:var(--bad)}
+.chip{display:inline-block;background:var(--blue-soft);color:var(--blue-ink);border-radius:999px;padding:3px 11px;margin:2px 4px 2px 0;font-size:13px;font-weight:500}
+.job{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 14px;border-top:1px solid var(--line);padding:14px 0}
+.job>div:first-child{flex:1 1 220px;min-width:0}
+.job>div:last-child{display:flex;align-items:center;gap:10px;margin-left:auto}
+.job button{margin:0}
+.job:first-of-type{border-top:0}
+.job small{color:var(--mut)}
+.score{font-weight:700;color:var(--blue-ink)}
+.tag{display:inline-block;border:1px solid var(--mut);color:var(--mut);border-radius:999px;padding:1px 10px;font-size:12px;font-weight:600}
+.tag.approved{border-color:var(--navy);color:#fff;background:var(--navy)}
+.tag.rejected{border-color:var(--bad);color:var(--bad)}
+li{margin:4px 0}
+.q{background:var(--soft);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.warn{background:#fdf6e8;border:1px solid #ecd9ac;border-left:3px solid var(--warn);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:13.5px;color:var(--warn)}
+.warn li{margin:2px 0}
+.cite{color:var(--mut);font-size:12px}
+pre{white-space:pre-wrap;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:13px/1.55 ui-monospace,Menlo,monospace;margin:6px 0}
+pre b{font-weight:600}
+.banner{border:1px solid #cfdbf5;border-left:3px solid var(--blue);background:var(--blue-soft);border-radius:12px;padding:14px 16px;margin:0 0 18px;font-size:13.5px;color:var(--ink)}
+code{background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
+.pagefoot{margin-top:28px;color:var(--mut);font-size:12.5px}
+@media(max-width:720px){
+.topbar{gap:8px;padding:10px 16px;height:auto;flex-wrap:wrap}
+.nav{flex:1 1 100%;flex-wrap:wrap;overflow:visible;gap:2px}
+.nlink{font-size:12px;padding:5px 8px}
+.brand{font-size:19px}
+.content{padding:26px 16px 56px}
+.pagehead h1{font-size:26px}
+section,.panel{padding:18px 16px}
+.draftgrid{grid-template-columns:1fr}
+}
+
+.panel>h2{font-size:16px}
+.muted{color:var(--mut)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row input,.row select,.row textarea,label~textarea,label~input,label~select{width:100%}
+.status{font-size:14px;margin-top:10px}
+.error{color:var(--bad)}
+.good{color:var(--good)}
+.question{font-size:19px;line-height:1.55;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0;font-weight:500;color:var(--navy)}
+.pill{display:inline-block;border-radius:999px;background:var(--blue-soft);color:var(--blue-ink);padding:4px 12px;font-size:13px;font-weight:600}
+.hidden{display:none!important}
+.review{border-top:1px solid var(--line);padding:14px 0}
+.camera-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin:8px 0}
+video{width:100%;max-height:280px;object-fit:cover;background:#101828;border-radius:12px;transform:scaleX(-1)}
+.camera-note{font-size:13px;color:var(--mut);margin-top:6px}
+button.danger{background:#a4262c}
+button.danger:hover{background:#8c1f24}
+.panel b{font-size:15px;color:var(--navy)}
+.panel label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin:14px 0 5px}
+.panel input,.panel select,.panel textarea{font:inherit;width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink);background:#fbfcfe}
+.panel textarea{min-height:170px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px}
+blockquote{margin:10px 0;padding:10px 14px;border-left:3px solid var(--blue);background:var(--soft);border-radius:0 10px 10px 0}
+@media(max-width:650px){.camera-grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+/* Quiet motion and tinted materials. No looped background animation. */
+:root{--soft:#eaf0f8;--card:rgba(250,252,255,.77);--line:rgba(123,145,185,.22);--blue:#3564de;--blue-soft:#e3eafb;--ease:cubic-bezier(.22,1,.36,1)}
+html{background:#eaf0f8}
+body{background:radial-gradient(ellipse at 4% 6%,rgba(137,164,228,.22),transparent 48%),radial-gradient(ellipse at 94% 35%,rgba(178,163,217,.22),transparent 48%),linear-gradient(145deg,#e8edf7 0%,#eff1f9 45%,#e7edf5 100%);min-height:100vh}
+.topbar{background:rgba(238,243,253,.82);border-bottom-color:rgba(135,155,190,.2);box-shadow:0 1px 18px rgba(38,59,98,.035)}
+section,.panel{background:linear-gradient(145deg,rgba(255,255,255,.8),rgba(242,246,253,.72));border-color:rgba(255,255,255,.85);box-shadow:0 3px 8px rgba(33,52,92,.025),0 18px 46px -24px rgba(39,65,116,.2);border-radius:20px}
+textarea,input[type=text],input[type=email],input:not([type]),select{background:rgba(247,250,255,.82);border-color:rgba(131,153,189,.24)}
+button,.partnext a{box-shadow:0 3px 8px rgba(32,51,91,.08);transition:background .18s ease,box-shadow .24s ease,transform .24s var(--ease),border-color .18s ease}
+button:active:not(:disabled),.partnext a:active{transform:scale(.975);box-shadow:0 1px 3px rgba(32,51,91,.08)}
+button.sec,button.secondary{background:rgba(248,251,255,.8)}
+.nlink{transition:background .22s ease,color .22s ease,box-shadow .22s ease}
+.nlink.active{background:rgba(255,255,255,.82);box-shadow:0 2px 9px rgba(44,75,145,.11);color:#2454cf}
+.nlink:focus-visible,button:focus-visible,.partnext a:focus-visible{outline:3px solid rgba(53,100,222,.5);outline-offset:3px}
+.pagehead h1{letter-spacing:-.045em}
+@keyframes material-arrive{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:no-preference){.content{animation:material-arrive .55s var(--ease) both}}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){button:hover:not(:disabled),.partnext a:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(32,51,91,.13)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* The selection is one moving material, not seven independent highlights. */
+.nav{position:relative;isolation:isolate}
+.nlink{position:relative;z-index:1;min-height:40px;display:inline-flex;align-items:center}
+.nav-indicator{position:absolute;z-index:0;left:0;top:0;pointer-events:none;background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.95);border-radius:10px;box-shadow:0 2px 9px rgba(44,75,145,.11);transition:transform .46s var(--ease),width .46s var(--ease),height .46s var(--ease)}
+.nav.motion-ready .nlink.active{background:transparent;box-shadow:none}
+.eyebrow{text-transform:none;letter-spacing:.025em;font-weight:600}
+.uplbox{background:rgba(227,235,250,.7);border-color:#aabbd7;max-width:100%;flex-wrap:wrap}.uplbox input[type=file]{max-width:100%;min-width:0}
+@media(max-width:720px){.nlink{min-height:44px;padding:7px 8px}}
+@media(prefers-reduced-motion:reduce){.nav-indicator{transition:none}}
+
+/* ===== Slate canvas layer: quiet left rail, tinted ground, open AI canvas, deliberate composer ===== */
+:root{--railw:204px;--violet:#8a63e8;--rose:#e0729e}
+body{background:radial-gradient(1100px 740px at -10% -12%,rgba(120,150,230,.32),transparent 62%),radial-gradient(920px 660px at 110% 8%,rgba(188,164,224,.28),transparent 58%),radial-gradient(860px 900px at 80% 114%,rgba(124,166,228,.22),transparent 60%),linear-gradient(160deg,#e7edf7 0%,#eef0f9 45%,#e6ecf6 100%)}
+@media(min-width:861px){
+body{padding-left:var(--railw)}
+.topbar{position:fixed;left:0;top:0;bottom:0;overflow-y:auto;width:var(--railw);height:auto;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:26px;padding:26px 14px;background:linear-gradient(180deg,rgba(244,247,253,.6),rgba(237,242,250,.34));border-bottom:0;border-right:1px solid rgba(123,145,185,.18);box-shadow:none}
+.brand{padding:0 13px;font-size:22px}
+.nav{flex-direction:column;align-items:stretch;gap:3px;overflow:visible}
+.nlink{width:100%;padding:9px 13px}
+.content{max-width:1040px;padding:52px 48px 104px}
+}
+@media(max-width:860px){
+.topbar{gap:6px 16px;padding:10px 16px;height:auto;flex-wrap:wrap}
+.nav{flex:1 1 100%;flex-wrap:wrap;overflow:visible;gap:2px}
+.nlink{font-size:12.5px;padding:6px 9px}
+.content{padding:28px 16px 68px}
+.pagehead h1{font-size:27px}
+}
+@keyframes slate-rise{from{opacity:0;transform:translateY(14px) scale(.996)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:no-preference){
+.content{animation:none}
+.pagehead,.content section:not(.off):not(.hidden),.content .panel:not(.hidden),.content .fold{animation:slate-rise .6s var(--ease) both}
+.content>*:nth-child(2){animation-delay:.05s}
+.content>*:nth-child(3){animation-delay:.1s}
+.content>*:nth-child(4){animation-delay:.16s}
+.content>*:nth-child(5){animation-delay:.22s}
+.composer section:nth-child(2){animation-delay:.08s}
+.content>#session,.content>#results{animation-delay:0s}
+}
+section,.panel{transition:opacity .45s var(--ease),transform .45s var(--ease),box-shadow .3s ease}
+section.off{transform:scale(.992)}
+.pagehead h1{font-size:clamp(29px,3.4vw,38px);letter-spacing:-.05em}
+h1 .grad{background:linear-gradient(118deg,#3564de 5%,#8a63e8 52%,#e0729e 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+button{background:linear-gradient(165deg,#3a6af0,#2b50cd);box-shadow:0 4px 14px rgba(43,90,220,.24),inset 0 1px 0 rgba(255,255,255,.14);border-radius:12px}
+button:hover{background:linear-gradient(165deg,#4172f5,#2f55d6)}
+button.sec,button.secondary{background:rgba(250,252,255,.85);color:var(--navy);border:1px solid rgba(123,145,185,.32);box-shadow:0 2px 6px rgba(32,51,91,.07)}
+button.sec:hover,button.secondary:hover{border-color:var(--navy);background:#fff}
+button.danger{background:linear-gradient(165deg,#b33138,#8f2228)}
+button.danger:hover{background:linear-gradient(165deg,#c03a41,#9c252c)}
+.tag{transition:background .3s ease,color .3s ease,border-color .3s ease}
+textarea{border-radius:16px;background:rgba(255,255,255,.9);box-shadow:inset 0 1px 3px rgba(30,50,90,.05)}
+textarea:focus,input[type=text]:focus,input[type=email]:focus,input:not([type]):focus,select:focus{border-color:rgba(53,100,222,.55);box-shadow:0 0 0 4px rgba(53,100,222,.12),0 0 22px -6px rgba(138,99,232,.35)}
+details.fold{background:rgba(247,250,255,.55);border:1px solid rgba(123,145,185,.22);border-radius:16px;margin:0 0 18px;overflow:hidden}
+details.fold>summary{cursor:pointer;list-style:none;display:flex;align-items:flex-start;gap:11px;padding:13px 17px;font-size:13.5px;font-weight:600;color:var(--navy);-webkit-user-select:none;user-select:none}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"";flex:none;width:7px;height:7px;margin-top:5px;border-right:2px solid #7c8aa5;border-bottom:2px solid #7c8aa5;transform:rotate(-45deg);transition:transform .32s var(--ease)}
+details.fold[open]>summary::before{transform:rotate(45deg)}
+details.fold .foldbody{padding:0 18px 16px 35px;font-size:13.5px;color:var(--ink)}
+.sumsub{color:var(--mut);font-weight:500}
+.question{position:relative;background:rgba(255,255,255,.93);border-color:transparent;border-radius:20px;padding:24px 26px;font-size:20px;box-shadow:0 2px 6px rgba(33,52,92,.05),0 20px 48px -24px rgba(46,74,140,.32)}
+@media(max-width:860px){.question{font-size:18px;padding:18px 20px}}
+.pill{background:rgba(255,255,255,.85);border:1px solid rgba(123,145,185,.3);box-shadow:0 1px 3px rgba(30,50,90,.06)}
+#coachMode{background:linear-gradient(135deg,rgba(53,100,222,.13),rgba(138,99,232,.14));border:1px solid rgba(110,95,220,.34);color:#463f9e}
+#coachMode::before{content:"\2726";margin-right:6px;font-size:11px;background:linear-gradient(135deg,#3564de,#8a63e8);-webkit-background-clip:text;background-clip:text;color:transparent}
+#liveReview:not(:empty){background:rgba(255,255,255,.88);border:1px solid rgba(123,145,185,.26);border-radius:14px;padding:12px 16px;margin:4px 0 2px}
+#answer{font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:14.5px;min-height:150px}
+.camfold{margin-top:14px}
+.review{border:1px solid rgba(123,145,185,.22);border-radius:14px;padding:16px 18px;margin:0 0 12px;background:rgba(255,255,255,.8)}
+.review:last-child{margin-bottom:0}
+blockquote{background:rgba(240,244,252,.8);border-left:3px solid #3564de;border-radius:0 12px 12px 0}
+
+
+#loginbox:has(#out),#authPanel:has(#signout){padding:0;background:none;border:0;box-shadow:none;margin:0 0 22px}
+#loginbox:has(#out)>h2,#authPanel:has(#signout)>b{display:none}
+#loginbox:has(#out) #loginmsg,#authPanel:has(#signout) #authControls{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--mut);margin:0}
+#loginbox:has(#out) .ok{color:var(--mut)}
+#loginbox:has(#out) button,#authPanel:has(#signout) button{font-size:12px;margin:0;padding:8px 12px}
+.pagehead h1{background:none;color:var(--navy);-webkit-text-fill-color:var(--navy)}
+@media(min-width:901px){.topbar{width:204px}.content{margin-left:204px;margin-right:0;padding-left:34px;padding-right:34px}}
+/* Theme is applied before paint and shared by all seven workspace pages. */
+.theme-toggle{background:rgba(250,252,255,.8);border:1px solid var(--line);border-radius:999px;color:var(--navy);font-size:12px;padding:8px 12px;margin:0;box-shadow:none;align-self:flex-start;min-height:40px;white-space:nowrap}
+@media(min-width:901px){.theme-toggle{margin:0 10px}.sidebar-note+.theme-toggle{margin-top:10px}}
+@media(max-width:900px){.theme-toggle{position:absolute;right:16px;top:10px;padding:5px 12px;min-height:36px}}
+html[data-theme=dark]{color-scheme:dark;background:#101722;--navy:#e5ebf7;--navy2:#c8d8f6;--ink:#e0e7f3;--mut:#a6b3c8;--line:rgba(163,185,222,.18);--soft:#1a2537;--card:#192435;--blue:#e0a366;--blue-ink:#f0bc84;--blue-soft:#3d2f22;--bad:#ffada7;--warn:#f2cd82;--ok:#edab6b;--good:#9cdbb9}
+html[data-theme=dark] body{color:var(--ink);background:radial-gradient(ellipse at 14% 5%,rgba(61,88,144,.23),transparent 47%),radial-gradient(ellipse at 92% 30%,rgba(94,74,135,.18),transparent 50%),linear-gradient(145deg,#121c2b,#141b29 55%,#111b28);min-height:100vh}
+html[data-theme=dark] .topbar{background:rgba(18,28,44,.86);border-color:var(--line);box-shadow:none}
+html[data-theme=dark] .nav-indicator{background:#453522;border-color:rgba(164,193,245,.12);box-shadow:0 2px 9px rgba(0,0,0,.12)}
+html[data-theme=dark] .nlink.active{color:#f0bc84;background:#453522}html[data-theme=dark] .nav.motion-ready .nlink.active{background:transparent}
+html[data-theme=dark] .nlink:hover{background:rgba(224,163,102,.12);color:#f0d0a8}
+html[data-theme=dark] section,html[data-theme=dark] .panel{background:rgba(25,37,56,.78);border-color:rgba(153,181,226,.14);box-shadow:0 10px 40px -28px #000}
+html[data-theme=dark] .resume-canvas,html[data-theme=dark] .target-canvas,html[data-theme=dark] .artifact-canvas,html[data-theme=dark] #s2[data-route],html[data-theme=dark] #s4[data-route],html[data-theme=dark] #s3.canvas{background:transparent;border:0;box-shadow:none}
+html[data-theme=dark] .source-composer,html[data-theme=dark] .target-composer{background:rgba(28,41,62,.88);border-color:rgba(155,184,233,.18);box-shadow:0 12px 42px -24px rgba(0,0,0,.4)}
+html[data-theme=dark] textarea,html[data-theme=dark] input:not([type=checkbox]),html[data-theme=dark] select{background:#1b293f;color:#e0e7f3;border-color:rgba(163,185,222,.23)}
+html[data-theme=dark] textarea::placeholder,html[data-theme=dark] input::placeholder{color:#98a8c1;opacity:1}
+html[data-theme=dark] #resume,html[data-theme=dark] .target-composer #targettitle,html[data-theme=dark] .target-composer #targettext{background:transparent;color:var(--ink)}
+html[data-theme=dark] .artifact-sheets>div,html[data-theme=dark] #s3 pre{background:#1c2a40;border-color:rgba(164,193,245,.1);box-shadow:0 5px 24px -16px rgba(0,0,0,.5)}
+html[data-theme=dark] .artifact-sheets textarea{color:var(--ink)}
+html[data-theme=dark] button,html[data-theme=dark] .partnext a{background:#a05e1f;color:#fff;border-color:transparent;box-shadow:0 3px 8px rgba(0,0,0,.14)}
+html[data-theme=dark] button:hover:not(:disabled){background:#b46d27}
+html[data-theme=dark] button.sec,html[data-theme=dark] button.secondary,html[data-theme=dark] button.theme-toggle{background:#24334b;color:#dce7fa;border-color:rgba(163,185,222,.22)}
+html[data-theme=dark] button.sec:hover,html[data-theme=dark] button.secondary:hover,html[data-theme=dark] button.theme-toggle:hover{background:#2d4161}
+html[data-theme=dark] #approve,html[data-theme=dark] #parse,html[data-theme=dark] #savetarget,html[data-theme=dark] #submit{background:#a05e1f;color:#fff}
+html[data-theme=dark] .artifact-actions{background:rgba(25,39,61,.94);border-color:rgba(163,185,222,.18);box-shadow:none}
+html[data-theme=dark] .chip,html[data-theme=dark] .pill{background:#3d2f22;color:#f0c795;border-color:rgba(163,185,222,.24);box-shadow:none}
+html[data-theme=dark] .tag{border-color:#a6b3c8;color:#cbd8ed}html[data-theme=dark] .tag.approved{background:#6b4a26;color:#fff;border-color:#c98d4e}
+html[data-theme=dark] .warn,html[data-theme=dark] .banner{background:#302b23;color:#f4d89b;border-color:#74603c}
+html[data-theme=dark] .fold,html[data-theme=dark] .saved-drawer[open]{background:rgba(29,43,65,.65);border-color:var(--line)}
+html[data-theme=dark] .question,html[data-theme=dark] #liveReview:not(:empty),html[data-theme=dark] .review,html[data-theme=dark] blockquote{background:#1d2c44;color:var(--ink);border-color:rgba(163,185,222,.2);box-shadow:none}
+html[data-theme=dark] #coachMode{background:#2c325b;border-color:#676ba5;color:#d8d6ff}
+html[data-theme=dark] .uplbox{background:transparent;border-color:#567196}
+html[data-theme=dark] pre,html[data-theme=dark] code,html[data-theme=dark] .q{background:#1b293f;color:#d6e3f9;border-color:var(--line)}
+html[data-theme=dark] #loginbox.signed,html[data-theme=dark] #loginbox:has(#out),html[data-theme=dark] #authPanel:has(#signout){background:none;border:0;box-shadow:none}
+html[data-theme=dark] .error,html[data-theme=dark] .bad,html[data-theme=dark] .dirty{color:#ffada7}
+html[data-theme=dark] .danger{background:#963b46;color:#fff}html[data-theme=dark] .danger:hover{background:#ac4653}
+
+html[data-theme=dark] h2 b{background:#453522;color:#f5d7ae}
+html[data-theme=dark] #loginbox,html[data-theme=dark] #authPanel{background:rgba(25,37,56,.78);border-color:rgba(153,181,226,.14)}html[data-theme=dark] #loginbox:has(#out),html[data-theme=dark] #authPanel:has(#signout){background:transparent;border:0}
+.navgroup{display:block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);padding:16px 14px 6px}
+.navgroup:first-of-type{padding-top:0}
+.stepnum{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:6px;background:rgba(43,95,227,.1);color:#1e4fd0;font-size:10px;font-weight:700;margin-right:8px;flex:none}
+@media(max-width:900px){.navgroup{display:none}.stepnum{width:15px;height:15px;font-size:9px;margin-right:5px}}
+</style>
+<script src="/motion.js" defer></script></head>
+<body>
+<header class="topbar">
+<a class="brand" href="/">Slate<span>.</span></a>
+<nav class="nav" aria-label="Workspace pages"><span class="navgroup" aria-hidden="true">Your flow</span><a class="nlink" data-route="resume" data-part="resume" href="/resume"><span class="stepnum" aria-hidden="true">1</span>Resume</a><a class="nlink" data-route="targets" data-part="targets" href="/targets"><span class="stepnum" aria-hidden="true">2</span>Targets</a><a class="nlink" data-route="draft" data-part="draft" href="/draft"><span class="stepnum" aria-hidden="true">3</span>Draft</a><span class="navgroup" aria-hidden="true">Practice &amp; explore</span><a class="nlink" data-route="comparisons" data-part="comparisons" href="/comparisons">Sample comparisons</a><a class="nlink" data-route="roadmap" data-part="roadmap" href="/roadmap">Roadmap</a><a class="nlink active" data-route="interview" href="/interview">Mock interview</a><a class="nlink" data-route="ai" href="/ai">AI draft</a><a class="nlink" data-route="practice" href="/practice">Practice sheet</a><a class="nlink" data-route="projects" href="/projects">Project review</a><a class="nlink" data-route="profile" href="/profile">Profile</a></nav>
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">Dark mode</button></header>
+<div class="content">
+<header class="pagehead">
+<h1>Mock interview</h1>
+<p class="sub">Adaptive practice grounded in your resume and target role.</p>
+</header>
+<section class="panel" id="authPanel"><b>Sign in</b><div id="authControls" class="status">Checking sign-in configuration…</div><div id="authMessage" class="status"></div></section>
+<section class="panel" id="setup">
+<h2>Interview setup</h2><p class="note">Choose a role, optionally attach one of your saved resume versions, and select how you want to answer.</p>
+<div class="row"><div><label for="role">Target role</label><input id="role" value="Data Analyst" maxlength="120"></div>
+<div><label for="resume">Resume context</label><select id="resume"><option value="">No resume context</option></select></div></div>
+<label for="mode">Interview mode</label><select id="mode"><option value="text">Text interview</option><option value="voice">Voice interview (browser speech recognition)</option></select>
+<p class="note">Voice recognition availability depends on your browser and microphone permissions. If unavailable, you can still type answers.</p>
+<button id="start">Start interview</button><button class="secondary" id="refreshResumes">Refresh saved resumes</button>
+<div id="setupStatus" class="status"></div></section>
+<section class="panel hidden" id="session">
+<div class="row"><div><span class="pill" id="progress">Question 1</span></div><div style="text-align:right"><span class="pill" id="coachMode">Coach</span></div></div>
+<div class="question" id="question"></div>
+<div id="liveReview" class="status muted"></div>
+<details class="fold camfold"><summary><span>Camera &amp; delivery analysis <span class="sumsub">optional camera preview and voice settings</span></span></summary><div class="foldbody"><div class="camera-grid">
+ <div><b>Camera</b><video id="cameraPreview" autoplay muted playsinline></video>
+  <button id="cameraToggle" class="secondary">Enable camera</button><div id="cameraStatus" class="camera-note">Camera is off. Enable it if you want a self-preview.</div>
+ </div>
+ <div><b>Delivery assessment</b><div class="camera-note">In voice mode, Slate records each answer locally to measure speaking pace, pauses, filler words and volume variation. Raw audio is not uploaded or retained.</div>
+  <div id="audioStatus" class="camera-note">Microphone capture starts with each voice answer.</div>
+ </div>
+</div></div></details>
+<label for="answer">Your answer</label><textarea id="answer" placeholder="Structure your answer clearly. Include your reasoning and a concrete example where relevant."></textarea>
+<div><button id="mic" class="secondary">Start dictation</button><button id="stopMic" class="secondary" disabled>Stop dictation</button><button id="submit">Submit answer</button><button id="endInterview" class="danger">End interview</button></div>
+<div id="sessionStatus" class="status"></div>
+</section>
+<section class="panel hidden" id="results"><h2>Interview feedback</h2><div id="summary"></div><div id="details"></div><button id="again">Start another interview</button></section>
+<div class="pagefoot">Slate demo build.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+let sid=null, token=()=>sessionStorage.getItem("slate_token")||"", recognition=null, listening=false, answerPrefix="";
+let cameraStream=null,audioStream=null,recorder=null,audioChunks=[],cameraOn=false,cameraPending=false;
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function msg(id,text,error=false){$(id).textContent=text;$(id).className="status "+(error?"error":"")}
+let contextEpoch=0,busy=false,sessionMode="text",sessionEnded=false;
+class StaleResponse extends Error{}
+function context(){return {epoch:contextEpoch,auth:token(),session:sid}}
+function current(c){return c.epoch===contextEpoch&&c.auth===token()&&c.session===sid}
+function resetInterview(){
+ contextEpoch++;stopDevices();sid=null;busy=false;sessionEnded=false;
+ ["question","answer","liveReview","summary","details","sessionStatus","setupStatus","audioStatus"].forEach(id=>{const e=$(id);if("value"in e)e.value="";else e.textContent=""});
+ $("resume").innerHTML='<option value="">No resume context</option>';
+ $("session").classList.add("hidden");$("results").classList.add("hidden");$("setup").classList.remove("hidden");
+ ["start","submit","endInterview","mic"].forEach(id=>$(id).disabled=false);$("stopMic").disabled=true;
+ $("endInterview").textContent="End interview";$("cameraToggle").textContent="Enable camera";$("cameraToggle").disabled=false;$("cameraStatus").textContent="Camera is off. Enable it if you want a self-preview.";
+ $("progress").dataset.count="1";$("progress").textContent="Question 1";
+}
+async function recoverSignIn(){sessionStorage.removeItem("slate_token");resetInterview();await initAuth();msg("authMessage","Sign-in expired. Sign in again; no action was retried.",true)}
+async function api(path,method="GET",body){
+ const c=context(),headers={};if(c.auth)headers.Authorization="Bearer "+c.auth;if(body!==undefined)headers["Content-Type"]="application/json";
+ let response,raw;
+ try{response=await fetch("/v1"+path,{method,headers,body:body!==undefined?JSON.stringify(body):undefined});raw=await response.text()}
+ catch(e){if(!current(c))throw new StaleResponse();throw new Error("Cannot reach Slate API. Check the connection and try deliberately; nothing was automatically retried.")}
+ if(!current(c))throw new StaleResponse();
+ if(response.status===401){await recoverSignIn();throw new StaleResponse()}
+ let data={};if(raw){try{data=JSON.parse(raw)}catch(e){throw new Error("Slate API returned a non-JSON response (HTTP "+response.status+"). Check the server and retry deliberately.")}}
+ if(!response.ok)throw new Error(data.error?.message||"Request failed ("+response.status+")");return data;
+}
+async function onboardingGate(){
+ // First-login routing, fire-and-forget from signedIn so sign-in rendering
+ // stays synchronous: a brand-new account (no confirmed profile) is redirected
+ // to onboarding once (save or skip both end it). A bare fetch on purpose -
+ // the page's own api() would discard this response as stale when the
+ // post-sign-in reset advances the page epoch. UX guidance only; data access
+ // stays enforced per verified token on every API call.
+ // Failure handling: a 401 is owned by the page's own sign-in recovery, so
+ // leave it alone. Any other failure (network, 5xx) gets one retry; if it
+ // still fails the user stays in place rather than being guessed about - the
+ // gate re-runs on the next page load, so a new user is not silently passed
+ // for good. The token check after every await is the logout/re-sign-in
+ // guard: a stale answer never redirects.
+ const t=token();if(!t)return false;
+ for(let attempt=0;attempt<2;attempt++){
+  let r=null;
+  try{r=await fetch("/v1/profile",{headers:{authorization:"Bearer "+t}})}catch(e){r=null}
+  if(token()!==t)return true;
+  if(r){
+   if(r.status===401)return false;
+   if(r.ok){const p=await r.json();if(p.status==="not_started"){location.replace("/onboarding");return true}return false}
+  }
+  if(attempt===0)await new Promise(res=>setTimeout(res,1500));
+ }
+ return false
+}
+function signedIn(email){onboardingGate();resetInterview();$("authControls").innerHTML="Signed in as "+esc(email||"local user")+' <button class="secondary" id="signout">Sign out</button>';$("authMessage").textContent="";$("signout").onclick=async()=>{sessionStorage.removeItem("slate_token");resetInterview();await initAuth()};loadResumes()}
+async function initAuth(){
+ let cfg;try{cfg=await (await fetch("/v1/config")).json()}catch(e){msg("authControls","Cannot reach API.",true);return}
+ const t0=token();if(t0){signedIn(t0.startsWith("dev:")?t0.slice(4):"");return}
+ if(cfg.mode==="dev"){
+  $("authControls").innerHTML='<input id="devEmail" placeholder="you@example.com"><button id="devSignIn">Sign in (local development)</button>';
+  $("devSignIn").onclick=()=>{const email=$("devEmail").value.trim();if(!email)return;sessionStorage.setItem("slate_token","dev:"+email);signedIn(email)}
+ }else if(cfg.mode==="google"){
+  $("authControls").innerHTML='<div id="googleButton"></div>';
+  const render=()=>google.accounts.id.initialize({client_id:cfg.googleClientId,callback:r=>{sessionStorage.setItem("slate_token",r.credential);signedIn()}}),button=()=>google.accounts.id.renderButton($("googleButton"),{theme:"outline",size:"large"});
+  const s=document.createElement("script");s.src="https://accounts.google.com/gsi/client";s.onload=()=>{render();button()};document.head.appendChild(s)
+ }else if(cfg.mode==="supabase"){
+  $("authControls").innerHTML='<button id="sbSignIn">Sign in with Google</button>';
+  const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";s.onload=()=>{const sb=supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);$("sbSignIn").onclick=()=>sb.auth.signInWithOAuth({provider:"google"})};document.head.appendChild(s)
+ }else{
+  msg("authControls","Sign-in is not configured. For local development set SLATE_DEV_AUTH=1 before starting Uvicorn.",true)
+ }
+}
+async function loadResumes(){try{const data=await api("/resume");$("resume").innerHTML='<option value="">No resume context</option>'+data.resumes.map(r=>'<option value="'+esc(r.resumeId)+'">'+esc(r.resumeId+" · "+r.name+" · "+r.skillCount+" skills")+'</option>').join("");msg("setupStatus",data.totalCount+" saved resume version(s) available.")}catch(e){if(e instanceof StaleResponse)return;msg("setupStatus",e.message,true)}}
+$("refreshResumes").onclick=loadResumes;
+$("start").onclick=async()=>{
+ if(busy)return;contextEpoch++;const c=context();busy=true;
+ try{
+  $("start").disabled=true;msg("setupStatus","Preparing your interview…");
+  sessionMode=$("mode").value;
+  const data=await api("/interview/mock","POST",{targetRole:$("role").value.trim(),mode:sessionMode,resumeId:$("resume").value||null});
+  sid=data.sessionId;sessionEnded=false;$("setup").classList.add("hidden");$("session").classList.remove("hidden");$("results").classList.add("hidden");
+  $("question").textContent=data.firstQuestion;$("coachMode").textContent=data.coachMode==="gemini"?"Gemini adaptive coach":"Fallback coach";
+  $("progress").textContent="Question 1";$("answer").value="";msg("sessionStatus",data.coachError?"Gemini unavailable: "+data.coachError:(data.carriedFromEarlier.length?"Prior weak areas included: "+data.carriedFromEarlier.join(", "):"Interview started."),!!data.coachError);
+  if(sessionMode==="voice"){await prepareAudio();if(c.epoch===contextEpoch&&c.auth===token())speak(data.firstQuestion,beginAnswerCapture)}
+ }catch(e){if(e instanceof StaleResponse)return;msg("setupStatus",e.message,true)}finally{if(c.epoch===contextEpoch&&c.auth===token()){busy=false;$("start").disabled=false}}
+};
+function speak(text,onDone){
+ const c=context();let completed=false;const done=()=>{if(!completed&&current(c)){completed=true;if(onDone)onDone()}};
+ if(!("speechSynthesis" in window)){done();return}
+ window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);
+ utterance.onend=done;utterance.onerror=done;
+ window.speechSynthesis.speak(utterance);
+}
+async function prepareAudio(){
+ const c=context();
+ try{const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:false}});if(!current(c)){stream.getTracks().forEach(t=>t.stop());return}audioStream=stream;$("audioStatus").textContent="Microphone ready. Audio is processed locally for delivery metrics."}
+ catch(e){if(!current(c))return;audioStream=null;$("audioStatus").textContent="Microphone unavailable. You can still answer by typing; delivery scoring will be unavailable."}
+}
+function beginAnswerCapture(){
+ if(!audioStream||!window.MediaRecorder||(recorder&&recorder.state!=="inactive"))return;
+ try{const chunks=[];recorder=new MediaRecorder(audioStream);recorder.answerChunks=chunks;recorder.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};recorder.start();$("audioStatus").textContent="Recording this answer locally…"}
+ catch(e){recorder=null;$("audioStatus").textContent="Audio recording unavailable; transcript-only evaluation will be used."}
+}
+function stopAnswerCapture(){
+ return new Promise(resolve=>{
+  if(!recorder||recorder.state==="inactive"){resolve(null);return}
+  const active=recorder;active.onstop=()=>resolve(new Blob(active.answerChunks||[],{type:active.mimeType||"audio/webm"}));active.stop();
+ });
+}
+async function measureDelivery(blob,transcript){
+ if(!blob||!blob.size)return null;
+ try{
+  const bytes=await blob.arrayBuffer(),ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const decoded=await ctx.decodeAudioData(bytes),samples=decoded.getChannelData(0),sr=decoded.sampleRate;
+  const frame=Math.max(1,Math.floor(sr*.05)),levels=[];
+  for(let i=0;i<samples.length;i+=frame){let sum=0,n=Math.min(frame,samples.length-i);for(let j=0;j<n;j++)sum+=samples[i+j]*samples[i+j];levels.push(Math.sqrt(sum/n))}
+  await ctx.close();
+  const peak=Math.max(...levels,0.00001),threshold=Math.max(.008,peak*.12);
+  let silent=0,pauses=0,inPause=false,run=0,activeLevels=[];
+  for(const v of levels){if(v<threshold){silent++;run++;if(run>=5&&!inPause){pauses++;inPause=true}}else{run=0;inPause=false;activeLevels.push(v)}}
+  const duration=decoded.duration,words=(transcript.trim().match(/\b[\w'-]+\b/g)||[]).length;
+  const mean=activeLevels.reduce((a,b)=>a+b,0)/Math.max(1,activeLevels.length);
+  const variance=activeLevels.reduce((a,b)=>a+(b-mean)**2,0)/Math.max(1,activeLevels.length);
+  // Estimate fundamental-frequency spread locally; raw audio never leaves the browser.
+  const pitchValues=[],decimation=4,pitchRate=sr/decimation,windowSize=1024;
+  const hop=Math.floor(sr*.15);
+  for(let offset=0;offset+windowSize*decimation<samples.length&&pitchValues.length<400;offset+=hop){
+   const frameData=new Float32Array(windowSize);let avg=0;
+   for(let j=0;j<windowSize;j++){frameData[j]=samples[offset+j*decimation];avg+=frameData[j]}
+   avg/=windowSize;let energy=0;for(let j=0;j<windowSize;j++){frameData[j]-=avg;energy+=frameData[j]*frameData[j]}
+   if(energy/windowSize<.00002)continue;
+   let bestLag=0,bestCorr=0;
+   for(let lag=Math.floor(pitchRate/350);lag<=Math.floor(pitchRate/75);lag++){
+    let corr=0;for(let j=0;j<windowSize-lag;j++)corr+=frameData[j]*frameData[j+lag];
+    corr/=Math.max(1,energy);if(corr>bestCorr){bestCorr=corr;bestLag=lag}
+   }
+   if(bestLag&&bestCorr>.32)pitchValues.push(pitchRate/bestLag);
+  }
+  pitchValues.sort((a,b)=>a-b);
+  const percentile=p=>pitchValues.length?pitchValues[Math.min(pitchValues.length-1,Math.floor((pitchValues.length-1)*p))]:null;
+  const fillers=(transcript.toLowerCase().match(/\b(um|uh|erm|like|you know|basically|actually)\b/g)||[]).length;
+  return {durationSeconds:+duration.toFixed(1),wordsPerMinute:Math.round(words/Math.max(duration,1)*60),
+   pauseRatio:+(silent/Math.max(1,levels.length)).toFixed(2),pauseCount:pauses,
+   fillerCount:fillers,meanVolume:+mean.toFixed(4),volumeVariation:+Math.sqrt(variance).toFixed(4),
+   medianPitchHz:pitchValues.length?+percentile(.5).toFixed(1):null,
+   pitchRangeHz:pitchValues.length?+(percentile(.9)-percentile(.1)).toFixed(1):null};
+ }catch(e){return null}
+}
+async function toggleCamera(){
+ if(cameraPending)return;const c=context();
+ if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;$("cameraPreview").srcObject=null;cameraOn=false;$("cameraToggle").textContent="Enable camera";$("cameraStatus").textContent="Camera is off.";return}
+ cameraPending=true;$("cameraToggle").disabled=true;
+ try{const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false});if(!current(c)){stream.getTracks().forEach(t=>t.stop());return}cameraStream=stream;$("cameraPreview").srcObject=cameraStream;cameraOn=true;$("cameraToggle").textContent="Turn camera off";$("cameraStatus").textContent="Camera preview is active on this device only. No video is uploaded or recorded."}
+ catch(e){if(!current(c))return;msg("cameraStatus","Camera permission denied or unavailable. You can continue without it.",true)}
+ finally{if(current(c)){cameraPending=false;$("cameraToggle").disabled=false}}
+}
+function stopDevices(){
+ if(recognition){recognition.onresult=null;recognition.onerror=null;recognition.onend=null;try{recognition.abort()}catch(e){}recognition=null}listening=false;
+ if(recorder&&recorder.state!=="inactive"){try{recorder.stop()}catch(e){}}recorder=null;audioChunks=[];
+ if(audioStream)audioStream.getTracks().forEach(t=>t.stop());
+ if(cameraStream)cameraStream.getTracks().forEach(t=>t.stop());
+ audioStream=null;cameraStream=null;cameraPending=false;$("cameraPreview").srcObject=null;
+ if("speechSynthesis" in window)window.speechSynthesis.cancel();
+}
+$("cameraToggle").onclick=toggleCamera;
+function makeRecognition(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;
+ const c=context(),r=new SR();r.lang="en-IN";r.interimResults=true;r.continuous=true;
+ r.onresult=e=>{if(!current(c))return;let finalText="",interim="";for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)finalText+=e.results[i][0].transcript+" ";else interim+=e.results[i][0].transcript}
+  if(finalText){$("answer").value=(answerPrefix+" "+finalText).trim();answerPrefix=$("answer").value}
+  msg("sessionStatus",interim?"Listening: "+interim:"Dictation captured.")};
+ r.onerror=e=>{if(current(c))msg("sessionStatus","Speech recognition: "+e.error+". You can type your answer instead.",true)};
+ r.onend=()=>{if(!current(c))return;listening=false;$("mic").disabled=false;$("stopMic").disabled=true};
+ return r;
+}
+$("mic").onclick=()=>{
+ if(recognition){try{recognition.abort()}catch(e){}}recognition=makeRecognition();
+ if(!recognition){msg("sessionStatus","Speech recognition is not supported in this browser. Type your answer instead.",true);return}
+ try{answerPrefix=$("answer").value;recognition.start();listening=true;$("mic").disabled=true;$("stopMic").disabled=false;msg("sessionStatus","Listening…")}catch(e){msg("sessionStatus","Could not start microphone. Check permissions or type your answer.",true)}
+};
+$("stopMic").onclick=()=>{if(recognition&&listening)recognition.stop()};
+$("submit").onclick=async()=>{
+ if(busy||!sid||sessionEnded)return;contextEpoch++;const c=context();busy=true;$("endInterview").disabled=true;$("mic").disabled=false;$("stopMic").disabled=true;
+ try{
+  $("submit").disabled=true;if(listening&&recognition)recognition.stop();
+  const text=$("answer").value.trim();if(!text)throw new Error("Enter or dictate an answer first.");
+  msg("sessionStatus","Evaluating your answer…");
+  const audioBlob=await stopAnswerCapture();
+  const deliveryMetrics=sessionMode==="voice"?await measureDelivery(audioBlob,text):null;
+  if(!current(c))return;
+  const result=await api("/interview/"+sid+"/answer","POST",{text,deliveryMetrics});
+  if(result.evaluation){const e=result.evaluation;$("liveReview").innerHTML='<b>Score: '+esc(e.score)+'/5</b> · '+esc(e.feedback)+'<br>'+(e.improvements.length?"Improve: "+esc(e.improvements.join("; ")):"");}
+  $("question").textContent=result.nextQuestion;$("answer").value="";$("progress").textContent="Question "+(Number($("progress").dataset.count||1)+1);$("progress").dataset.count=String(Number($("progress").dataset.count||1)+1);msg("sessionStatus",result.isFollowUp?"Follow-up probe.":"Moving to the next interview topic.");
+  if(result.evaluation?.deliveryScore){$("liveReview").innerHTML+='<br><b>Delivery: '+esc(result.evaluation.deliveryScore)+'/5</b> · '+esc(result.evaluation.deliveryFeedback)}
+  if(result.done){sessionEnded=true;$("endInterview").textContent="Retry report";await finish();return}
+  if(sessionMode==="voice")speak(result.nextQuestion,beginAnswerCapture);
+ }catch(e){if(e instanceof StaleResponse)return;if(current(c))msg("sessionStatus",e.message,true)}finally{if(current(c)){busy=false;$("submit").disabled=sessionEnded;$("endInterview").disabled=false}}
+};
+async function finish(){
+ stopDevices();
+ const fb=await api("/interview/"+sid+"/feedback");$("session").classList.add("hidden");$("results").classList.remove("hidden");
+ $("summary").innerHTML='<p><b>'+esc(fb.summary)+'</b></p><p>Content score: <b>'+esc(fb.averageScore)+'/5</b>'+(fb.averageDeliveryScore!==null&&fb.averageDeliveryScore!==undefined?' · Voice delivery: <b>'+esc(fb.averageDeliveryScore)+'/5</b>':'')+' · Coach: '+esc(fb.coachMode)+'</p>'+(fb.coachError?'<p class="status error"><b>Gemini unavailable:</b> '+esc(fb.coachError)+'</p>':"");
+ const reviews=fb.answerReviews||[];$("details").innerHTML=reviews.map((r,i)=>'<div class="review"><b>'+esc(r.isFollowUp?"Follow-up":"Answer "+(i+1))+' · '+esc(r.score)+'/5</b><p>'+esc(r.question)+'</p><blockquote><b>Your answer (verbatim):</b><p>“'+esc(r.answer||"Answer text was not retained for this older session.")+'”</p></blockquote><p>'+esc(r.feedback)+'</p>'+(r.strengths.length?'<p><b>Strengths:</b> '+esc(r.strengths.join("; "))+'</p>':"")+(r.improvements.length?'<p><b>Improve:</b> '+esc(r.improvements.join("; "))+'</p>':"")+(r.deliveryScore?'<p><b>Voice delivery: '+esc(r.deliveryScore)+'/5</b> · '+esc(r.deliveryFeedback)+'</p>':"")+(r.deliveryImprovements?.length?'<p><b>Delivery suggestions:</b> '+esc(r.deliveryImprovements.join("; "))+'</p>':"")+'</div>').join("")+(fb.weakAreas.length?'<h3>Weak areas to revisit</h3><ul>'+fb.weakAreas.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>":"")+(fb.strengths.length?'<h3>Strengths</h3><ul>'+fb.strengths.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>":"")+(fb.improvements.length?'<h3>Recommended improvements</h3><ul>'+fb.improvements.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>":"");
+}
+$("endInterview").onclick=async()=>{
+ if(busy||!sid)return;contextEpoch++;const c=context();busy=true;$("submit").disabled=true;
+ try{$("endInterview").disabled=true;if(listening&&recognition)recognition.stop();msg("sessionStatus","Ending interview and preparing your report…");await stopAnswerCapture();if(!current(c))return;if(!sessionEnded)await api("/interview/"+sid+"/end","POST",{});sessionEnded=true;$("endInterview").textContent="Retry report";await finish()}
+ catch(e){if(e instanceof StaleResponse)return;if(current(c)){msg("sessionStatus",e.message,true);$("endInterview").disabled=false}}
+ finally{if(current(c)){busy=false;$("submit").disabled=sessionEnded}}
+};
+$("again").onclick=()=>{resetInterview();loadResumes()};
+window.addEventListener("pagehide",()=>{contextEpoch++;stopDevices()});
+initAuth();
+</script><script>
+// Keep the active page visible as a single moving selection, including wrapped nav.
+(()=>{const nav=document.querySelector('.nav');if(!nav)return;
+const indicator=document.createElement('span');indicator.className='nav-indicator';indicator.setAttribute('aria-hidden','true');nav.prepend(indicator);
+function place(){const link=nav.querySelector('.nlink.active');if(!link)return;indicator.style.width=link.offsetWidth+'px';indicator.style.height=link.offsetHeight+'px';indicator.style.transform=`translate(${link.offsetLeft}px,${link.offsetTop}px)`;}
+place();requestAnimationFrame(()=>nav.classList.add('motion-ready'));
+new MutationObserver(place).observe(nav,{subtree:true,attributes:true,attributeFilter:['class']});new ResizeObserver(place).observe(nav);document.fonts?.ready.then(place);
+})();
+</script>
+<script>
+(()=>{const button=document.getElementById('theme-toggle');
+function show(){const dark=document.documentElement.dataset.theme==='dark';button.textContent=dark?'Light mode':'Dark mode';button.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');button.setAttribute('aria-pressed',String(dark));}
+button.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('slate_theme',next)}catch(_){}show()});
+window.addEventListener('storage',e=>{if(e.key==='slate_theme'&&(e.newValue==='light'||e.newValue==='dark')){document.documentElement.dataset.theme=e.newValue;show()}});show();})();
+</script>
+</body></html>
