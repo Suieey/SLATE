@@ -124,5 +124,5 @@ def check_grounding(text: str, blocks: dict, allow_job: bool = True) -> list:
 
 
 def strip_tags(text: str) -> str:
-    """Display text without the [S#]/[J] citation markers."""
-    return re.sub(r"\s*\[(?:S\d+|J)\]", "", text or "")
+    """Display text without the [S#]/[J] citation markers (any case, comma lists)."""
+    return re.sub(r"\s*\[(?:S\d+|J)(?:\s*,\s*(?:S\d+|J))*\]", "", text or "", flags=re.IGNORECASE)
