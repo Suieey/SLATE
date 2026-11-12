@@ -545,7 +545,9 @@ async function loadJobs(){
       ?esc(x.company)+" · "+esc(x.location)+" · no stated deadline · "+fresh+" · "+esc(x.source==="lever"?"Lever":"Greenhouse")+" board"+(x.url?` · <a href="${esc(x.url)}" target="_blank" rel="noopener">Original posting</a>`:"")
       :`${esc(x.company)} · ${esc(x.location)} · apply by ${esc(x.deadline)} · Demo fixture: ${esc(x.freshness||"unknown")} (not live-verified)`;
     const score=source==="live"?`${Math.round(x.matchScore*100)}% mention overlap (extracted)`:`${Math.round(x.matchScore*100)}% skill overlap`;
-    return `<div class="job"><div><b>${esc(x.title)}</b><br><small>${meta}</small><br><small>${esc(x.reason||"")}</small></div><div><span class="score">${score}</span> <button data-j="${esc(x.jobId)}">Tailor</button></div></div>`}).join("");
+    const ranking=(x.rankingReasons||[]).join(" · ");
+    const roleContext=x.roleContext?.note||"";
+    return `<div class="job"><div><b>${esc(x.title)}</b><br><small>${meta}</small><br><small>${esc(x.reason||"")}</small><br><small>${esc(ranking)}</small>${roleContext?'<br><small>'+esc(roleContext)+'</small>':''}</div><div><span class="score">${score}</span> <button data-j="${esc(x.jobId)}">Tailor</button></div></div>`}).join("");
   document.querySelectorAll("[data-j]").forEach(b=>b.onclick=()=>tailor(b.dataset.j));
   on("s2");on("s4");on("s5");
 }

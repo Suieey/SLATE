@@ -200,16 +200,19 @@ class SlateService:
 
 
     def jobs(self, query="", location="", resume_id=None, source=None) -> dict:
-        skills = self._resume(resume_id)["skills"] if resume_id else []
+        parsed = self._resume(resume_id) if resume_id else None
+        skills = parsed["skills"] if parsed else []
         if source in (None, "", "sample", "mock"):
-            return {"jobs": J.search_jobs(query, location, skills),
-                    "sourceLabel": "sample_fixtures"}
+            return {"jobs": J.search_jobs(query, location, skills, parsed_resume=parsed),
+                    "sourceLabel": "sample_fixtures",
+                    "rankingNote": "Sorted by recognized skill coverage and role-query relevance. Scores are textual signals, not qualification or hiring predictions."}
         if source != "live":
             raise SlateError("invalid_source",
                              "Unknown jobs source. Use 'live' for the public-board feed, or omit it for sample fixtures.")
         listings, status = self._feed.listings()
-        return {"jobs": J.search_jobs(query, location, skills, listings=listings),
+        return {"jobs": J.search_jobs(query, location, skills, listings=listings, parsed_resume=parsed),
                 "sourceLabel": "live_public_boards",
+                "rankingNote": "Sorted by recognized skill coverage and role-query relevance. Live posting skills are extracted text mentions, not verified requirements.",
                 "feedStatus": status}
 
     def jobs_feed_status(self) -> dict:
