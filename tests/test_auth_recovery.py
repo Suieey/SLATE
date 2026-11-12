@@ -22,7 +22,9 @@ def test_auth_epoch_clears_sensitive_ui_and_discards_old_responses(page):
     s=(ROOT/'web'/page).read_text()
     assert 'auth!==token()||generation!==sourceGeneration' in s
     assert 'function resetAccountState()' in s
-    assert 'function signedIn(email){\n  resetAccountState();' in s
+    # sign-in still resets account state first thing after the first-login
+    # onboarding gate (which only redirects brand-new accounts).
+    assert 'function signedIn(email){\n  onboardingGate();\n  resetAccountState();' in s
     assert 'catch(e){if(e instanceof StaleResponse)return;' in s
     assert 'sourceGeneration++' in s
 
