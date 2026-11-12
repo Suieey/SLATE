@@ -11,6 +11,11 @@ with tempfile.TemporaryDirectory() as tmp:
   for _ in range(80):
    try:urllib.request.urlopen('http://127.0.0.1:8024/v1/config',timeout=1);break
    except Exception:time.sleep(.1)
+  # Onboarding gate: this check's synthetic users have already made the one-time
+  # setup decision (empty confirmed profile), so sign-in lands on the page under test.
+  for _email in ['first@example.com', 'second@example.com']:
+      _req=urllib.request.Request("http://127.0.0.1:8024/v1/profile",data=b'{"answers":{},"confirm":true}',headers={"Authorization":"Bearer dev:"+_email,"Content-Type":"application/json"},method="POST")
+      urllib.request.urlopen(_req,timeout=5).read()
   with sync_playwright() as pw:
    browser=pw.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--no-sandbox'])
    for width in (1440,390):
