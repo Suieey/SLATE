@@ -104,7 +104,7 @@ code{background:var(--soft);border:1px solid var(--line);border-radius:5px;paddi
 .pagefoot{margin-top:28px;color:var(--mut);font-size:12.5px}
 @media(max-width:720px){
 .topbar{gap:8px;padding:10px 16px;height:auto;flex-wrap:wrap}
-.nav{flex:1 1 100%;flex-wrap:wrap;overflow:visible;gap:2px}
+.nav{flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;gap:2px}
 .nlink{font-size:12px;padding:5px 8px}
 .brand{font-size:19px}
 .content{padding:26px 16px 56px}
@@ -165,7 +165,7 @@ button.sec,button.secondary{background:rgba(248,251,255,.8)}
 .composer-actions{justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;margin-top:16px}.composer-actions .uplbox{font-size:11px;background:transparent;border:0;padding:0;border-radius:0}.composer-actions input{max-width:180px;font-size:11px}.composer-actions button{background:var(--blue);border-radius:999px;padding:11px 20px;margin:0;font-size:13px}.composer-actions button span{margin-left:12px}
 .response-surface{margin:28px 0;padding:8px 2px 16px}.response-heading{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding-bottom:12px}.response-heading>span:first-child{font-size:22px;color:var(--blue)}.response-heading h2{font-size:15px;margin:0}.mode-label{margin-left:auto;font-size:11px;color:var(--mut);font-weight:400}.empty-hint{font-size:14px;color:var(--mut);padding:12px 0;max-width:56ch}.response-surface #parsed{font-size:15px;padding-top:18px}.response-surface #parsed>b{font-size:20px;font-weight:600}.response-surface details{font-size:13px}.response-surface .note{font-size:12px;max-width:72ch}
 .skill-disclosure{margin-top:20px;border-top:1px solid var(--line);padding-top:8px}.skill-disclosure summary{font-weight:600}.resume-canvas:not(.has-source) .skill-disclosure{display:none}
-.resume-canvas.has-source{display:flex;flex-direction:column}.has-source>.response-surface{order:0;margin-top:0}.has-source>.source-composer{order:1}.has-source>.saved-drawer{order:2;margin-top:18px}.has-source #resume{min-height:130px;max-height:210px}.has-source .composer-label{font-size:17px}.has-source .composer-hint{display:none}
+.resume-canvas.has-source{display:flex;flex-direction:column}.has-source>.saved-drawer{order:0}.has-source>.source-composer{order:1}.has-source>.response-surface{order:2;margin-top:28px}.has-source #resume{min-height:130px;max-height:210px}.has-source .composer-label{font-size:17px}.has-source .composer-hint{display:none}
 .target-canvas>.note{margin:0 0 16px;max-width:75ch;font-size:12px}.target-composer>#targettitle{font-size:18px;font-weight:500;letter-spacing:-.02em;border:0;border-radius:0;background:none;padding:8px 0;margin-bottom:8px}.target-composer #targettext{min-height:230px;background:none;border:0;padding:14px 0;font:14px/1.7 "Inter",system-ui,sans-serif;box-shadow:none}.target-metadata{font-size:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:12px 0}.target-metadata summary span{color:var(--mut);margin-left:auto}.target-metadata[open]{padding-bottom:16px}.target-metadata input{font-size:13px}.target-composer>.toolrow{border-top:1px solid var(--line);padding-top:14px;margin:0}.target-composer button{border-radius:999px;font-size:12px}.target-composer #savetarget{background:var(--blue)}
 .artifact-canvas>h2{font-size:13px;color:var(--mut);font-weight:500;justify-content:space-between}.artifact-topline{display:flex;gap:12px;justify-content:space-between;align-items:center;font-size:12px;color:var(--mut);margin:20px 0 12px}.artifact-sheets{gap:18px}.artifact-sheets>div{padding:24px;background:rgba(255,255,255,.85);box-shadow:0 6px 25px -20px rgba(30,48,85,.3);border:1px solid #fff;border-radius:8px}.artifact-sheets label{font-size:11px;font-weight:500;color:var(--mut);margin-bottom:18px!important}.artifact-sheets textarea{border:0;padding:0!important;background:none!important;border-radius:0;font:14px/1.8 "Inter",system-ui,sans-serif;min-height:510px!important;resize:vertical}.artifact-actions{position:sticky;bottom:16px;z-index:5;background:rgba(236,241,251,.92);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.85);padding:12px;border-radius:18px;box-shadow:0 5px 30px rgba(35,49,85,.1);margin-top:20px}.artifact-actions button{border-radius:999px;font-size:12px}#approve{background:var(--blue)}
 #s2,#s4{background:transparent;border:0;box-shadow:none;padding:0}#s2>h2,#s4>h2{font-size:13px;color:var(--mut)}.job{padding:20px 0}.job button{border-radius:999px}.pagefoot{font-size:11px;color:var(--mut)}
@@ -177,7 +177,7 @@ button.sec,button.secondary{background:rgba(248,251,255,.8)}
 @media(max-width:760px){.context-panel{order:-1;border-top:0;border-bottom:1px solid var(--line);padding:0 0 10px}.context-mobile-toggle{display:flex;justify-content:space-between;font-weight:600;font-size:12px;min-height:44px}.context-mobile-toggle>span{font-size:10px;font-weight:400;color:var(--mut)}.context-mobile-toggle::before{display:none}.context-panel .context-heading{display:none}.context-panel .context-intro{margin-top:16px}.artifact-actions{position:static}.studio-layout{gap:18px}}
 /* A quiet app rail leaves the active canvas, not a row of fields, in focus. */
 @media(min-width:901px){
-.topbar{position:fixed;inset:0 auto 0 0;width:204px;height:100vh;padding:30px 18px;display:flex;flex-direction:column;align-items:stretch;gap:30px;border-bottom:0;border-right:1px solid rgba(138,158,192,.16);background:rgba(239,244,253,.7);backdrop-filter:blur(22px)}
+.topbar{position:fixed;inset:0 auto 0 0;width:204px;height:100vh;overflow-y:auto;padding:30px 18px;display:flex;flex-direction:column;align-items:stretch;gap:30px;border-bottom:0;border-right:1px solid rgba(138,158,192,.16);background:rgba(239,244,253,.7);backdrop-filter:blur(22px)}
 .brand{font-size:25px;padding-left:12px;align-self:flex-start}
 .nav{display:flex;flex-direction:column;align-items:stretch;gap:6px;overflow:visible;flex:none}
 .nav::before{content:'Workspace';font-size:11px;color:var(--mut);padding:0 12px 10px}
@@ -199,12 +199,12 @@ button.sec,button.secondary{background:rgba(248,251,255,.8)}
 .theme-toggle{background:rgba(250,252,255,.8);border:1px solid var(--line);border-radius:999px;color:var(--navy);font-size:12px;padding:8px 12px;margin:0;box-shadow:none;align-self:flex-start;min-height:40px;white-space:nowrap}
 @media(min-width:901px){.theme-toggle{margin:0 10px}.sidebar-note+.theme-toggle{margin-top:10px}}
 @media(max-width:900px){.theme-toggle{position:absolute;right:16px;top:10px;padding:5px 12px;min-height:36px}}
-html[data-theme=dark]{color-scheme:dark;background:#101722;--navy:#e5ebf7;--navy2:#c8d8f6;--ink:#e0e7f3;--mut:#a6b3c8;--line:rgba(163,185,222,.18);--soft:#1a2537;--card:#192435;--blue:#89adff;--blue-ink:#acc5ff;--blue-soft:#243555;--bad:#ffada7;--warn:#f2cd82;--ok:#aac5ff;--good:#9cdbb9}
+html[data-theme=dark]{color-scheme:dark;background:#101722;--navy:#e5ebf7;--navy2:#c8d8f6;--ink:#e0e7f3;--mut:#a6b3c8;--line:rgba(163,185,222,.18);--soft:#1a2537;--card:#192435;--blue:#e0a366;--blue-ink:#f0bc84;--blue-soft:#3d2f22;--bad:#ffada7;--warn:#f2cd82;--ok:#edab6b;--good:#9cdbb9}
 html[data-theme=dark] body{color:var(--ink);background:radial-gradient(ellipse at 14% 5%,rgba(61,88,144,.23),transparent 47%),radial-gradient(ellipse at 92% 30%,rgba(94,74,135,.18),transparent 50%),linear-gradient(145deg,#121c2b,#141b29 55%,#111b28);min-height:100vh}
 html[data-theme=dark] .topbar{background:rgba(18,28,44,.86);border-color:var(--line);box-shadow:none}
-html[data-theme=dark] .nav-indicator{background:#293c5e;border-color:rgba(164,193,245,.12);box-shadow:0 2px 9px rgba(0,0,0,.12)}
-html[data-theme=dark] .nlink.active{color:#c3d6ff;background:#293c5e}html[data-theme=dark] .nav.motion-ready .nlink.active{background:transparent}
-html[data-theme=dark] .nlink:hover{background:rgba(112,146,210,.12);color:#d8e5ff}
+html[data-theme=dark] .nav-indicator{background:#453522;border-color:rgba(164,193,245,.12);box-shadow:0 2px 9px rgba(0,0,0,.12)}
+html[data-theme=dark] .nlink.active{color:#f0bc84;background:#453522}html[data-theme=dark] .nav.motion-ready .nlink.active{background:transparent}
+html[data-theme=dark] .nlink:hover{background:rgba(224,163,102,.12);color:#f0d0a8}
 html[data-theme=dark] section,html[data-theme=dark] .panel{background:rgba(25,37,56,.78);border-color:rgba(153,181,226,.14);box-shadow:0 10px 40px -28px #000}
 html[data-theme=dark] .resume-canvas,html[data-theme=dark] .target-canvas,html[data-theme=dark] .artifact-canvas,html[data-theme=dark] #s2[data-route],html[data-theme=dark] #s4[data-route],html[data-theme=dark] #s3.canvas{background:transparent;border:0;box-shadow:none}
 html[data-theme=dark] .source-composer,html[data-theme=dark] .target-composer{background:rgba(28,41,62,.88);border-color:rgba(155,184,233,.18);box-shadow:0 12px 42px -24px rgba(0,0,0,.4)}
@@ -213,14 +213,14 @@ html[data-theme=dark] textarea::placeholder,html[data-theme=dark] input::placeho
 html[data-theme=dark] #resume,html[data-theme=dark] .target-composer #targettitle,html[data-theme=dark] .target-composer #targettext{background:transparent;color:var(--ink)}
 html[data-theme=dark] .artifact-sheets>div,html[data-theme=dark] #s3 pre{background:#1c2a40;border-color:rgba(164,193,245,.1);box-shadow:0 5px 24px -16px rgba(0,0,0,.5)}
 html[data-theme=dark] .artifact-sheets textarea{color:var(--ink)}
-html[data-theme=dark] button,html[data-theme=dark] .partnext a{background:#416bce;color:#fff;border-color:transparent;box-shadow:0 3px 8px rgba(0,0,0,.14)}
-html[data-theme=dark] button:hover:not(:disabled){background:#4b78dd}
+html[data-theme=dark] button,html[data-theme=dark] .partnext a{background:#a05e1f;color:#fff;border-color:transparent;box-shadow:0 3px 8px rgba(0,0,0,.14)}
+html[data-theme=dark] button:hover:not(:disabled){background:#b46d27}
 html[data-theme=dark] button.sec,html[data-theme=dark] button.secondary,html[data-theme=dark] button.theme-toggle{background:#24334b;color:#dce7fa;border-color:rgba(163,185,222,.22)}
 html[data-theme=dark] button.sec:hover,html[data-theme=dark] button.secondary:hover,html[data-theme=dark] button.theme-toggle:hover{background:#2d4161}
-html[data-theme=dark] #approve,html[data-theme=dark] #parse,html[data-theme=dark] #savetarget,html[data-theme=dark] #submit{background:#416bce;color:#fff}
+html[data-theme=dark] #approve,html[data-theme=dark] #parse,html[data-theme=dark] #savetarget,html[data-theme=dark] #submit{background:#a05e1f;color:#fff}
 html[data-theme=dark] .artifact-actions{background:rgba(25,39,61,.94);border-color:rgba(163,185,222,.18);box-shadow:none}
-html[data-theme=dark] .chip,html[data-theme=dark] .pill{background:#263a5c;color:#c0d4ff;border-color:rgba(163,185,222,.24);box-shadow:none}
-html[data-theme=dark] .tag{border-color:#a6b3c8;color:#cbd8ed}html[data-theme=dark] .tag.approved{background:#31528b;color:#fff;border-color:#8dacdf}
+html[data-theme=dark] .chip,html[data-theme=dark] .pill{background:#3d2f22;color:#f0c795;border-color:rgba(163,185,222,.24);box-shadow:none}
+html[data-theme=dark] .tag{border-color:#a6b3c8;color:#cbd8ed}html[data-theme=dark] .tag.approved{background:#6b4a26;color:#fff;border-color:#c98d4e}
 html[data-theme=dark] .warn,html[data-theme=dark] .banner{background:#302b23;color:#f4d89b;border-color:#74603c}
 html[data-theme=dark] .fold,html[data-theme=dark] .saved-drawer[open]{background:rgba(29,43,65,.65);border-color:var(--line)}
 html[data-theme=dark] .question,html[data-theme=dark] #liveReview:not(:empty),html[data-theme=dark] .review,html[data-theme=dark] blockquote{background:#1d2c44;color:var(--ink);border-color:rgba(163,185,222,.2);box-shadow:none}
@@ -231,14 +231,40 @@ html[data-theme=dark] #loginbox.signed,html[data-theme=dark] #loginbox:has(#out)
 html[data-theme=dark] .error,html[data-theme=dark] .bad,html[data-theme=dark] .dirty{color:#ffada7}
 html[data-theme=dark] .danger{background:#963b46;color:#fff}html[data-theme=dark] .danger:hover{background:#ac4653}
 
-html[data-theme=dark] h2 b{background:#31486c;color:#e4edff}
+html[data-theme=dark] h2 b{background:#453522;color:#f5d7ae}
 html[data-theme=dark] #loginbox,html[data-theme=dark] #authPanel{background:rgba(25,37,56,.78);border-color:rgba(153,181,226,.14)}html[data-theme=dark] #loginbox:has(#out),html[data-theme=dark] #authPanel:has(#signout){background:transparent;border:0}
+</style>
+<style>
+/* UX organisation pass: nav groups, step numbers, stable resume zones, upload lock zone */
+.navgroup{display:none}
+.stepnum{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:6px;background:rgba(43,95,227,.1);color:var(--blue-ink);font-size:10px;font-weight:700;margin-right:8px;flex:none}
+.nlink.active .stepnum{background:rgba(43,95,227,.16)}
+.nav::before{content:none!important}
+.navgroup{display:block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);padding:16px 14px 6px}
+.navgroup:first-of-type{padding-top:0}
+@media(max-width:900px){.navgroup{display:none}.stepnum{width:15px;height:15px;font-size:9px;margin-right:5px}}
+.upload-zone{display:flex;align-items:center;gap:4px;border:1.5px dashed var(--line);border-radius:16px;padding:2px;margin:0 0 14px;transition:border-color .2s,background .2s,box-shadow .2s}
+.uz-drop{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border-radius:14px}
+.uz-badge{flex:none;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut);background:var(--soft)}
+.upload-zone.locked{background:rgba(245,247,251,.6)}
+.upload-zone.locked .uz-drop{cursor:not-allowed}
+.upload-zone.unlocked{border-color:rgba(43,95,227,.55);background:var(--blue-soft);box-shadow:0 4px 18px -10px rgba(43,95,227,.35)}
+.upload-zone.unlocked .uz-drop{cursor:pointer}
+.upload-zone.unlocked .uz-badge{background:var(--blue);border-color:var(--blue);color:#fff}
+.uz-title{display:block;font-weight:600;font-size:14px;color:var(--navy)}
+.uz-sub{display:block;font-size:12px;color:var(--mut);margin-top:2px;line-height:1.45}
+.uz-input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.composer-or{font-size:12px;color:var(--mut)}
+html[data-theme=dark] .upload-zone.locked{background:rgba(25,37,56,.45)}
+html[data-theme=dark] .uz-badge{background:rgba(25,37,56,.6)}
+html[data-theme=dark] .upload-zone.unlocked{background:rgba(43,95,227,.14);border-color:rgba(120,160,255,.4)}
+html[data-theme=dark] .uz-title{color:#f5d7ae}
 </style>
 <script src="/motion.js" defer></script></head>
 <body>
 <header class="topbar">
 <a class="brand" href="/">Slate<span>.</span></a>
-<nav class="nav" aria-label="Workspace pages"><a class="nlink active" data-route="resume" data-part="resume" href="/resume">Resume</a><a class="nlink" data-route="targets" data-part="targets" href="/targets">Targets</a><a class="nlink" data-route="draft" data-part="draft" href="/draft">Draft</a><a class="nlink" data-route="comparisons" data-part="comparisons" href="/comparisons">Sample comparisons</a><a class="nlink" data-route="roadmap" data-part="roadmap" href="/roadmap">Roadmap</a><a class="nlink" data-route="interview" href="/interview">Mock interview</a><a class="nlink" data-route="ai" href="/ai">AI draft</a></nav><div class="sidebar-note"><b>Space for your next step.</b>Source-led. Human reviewed.</div>
+<nav class="nav" aria-label="Workspace pages"><span class="navgroup" aria-hidden="true">Your flow</span><a class="nlink active" data-route="resume" data-part="resume" href="/resume"><span class="stepnum" aria-hidden="true">1</span>Resume</a><a class="nlink" data-route="targets" data-part="targets" href="/targets"><span class="stepnum" aria-hidden="true">2</span>Targets</a><a class="nlink" data-route="draft" data-part="draft" href="/draft"><span class="stepnum" aria-hidden="true">3</span>Draft</a><span class="navgroup" aria-hidden="true">Practice &amp; explore</span><a class="nlink" data-route="comparisons" data-part="comparisons" href="/comparisons">Sample comparisons</a><a class="nlink" data-route="roadmap" data-part="roadmap" href="/roadmap">Roadmap</a><a class="nlink" data-route="interview" href="/interview">Mock interview</a><a class="nlink" data-route="ai" href="/ai">AI draft</a><a class="nlink" data-route="practice" href="/practice">Practice sheet</a><a class="nlink" data-route="projects" href="/projects">Project review</a><a class="nlink" data-route="profile" href="/profile">Profile</a></nav><div class="sidebar-note"><b>Space for your next step.</b>Source-led. Human reviewed.</div>
 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">Dark mode</button></header>
 <div class="content">
 <header class="pagehead">
@@ -260,7 +286,7 @@ html[data-theme=dark] #loginbox,html[data-theme=dark] #authPanel{background:rgba
 <p class="note">Saved versions belong to this signed-in user. Reopening keeps original source and your review separate; it does not reparse or approve a draft.</p>
 <div id="savedmsg" class="msg"></div></details>
 <div class="source-composer"><label for="resume" class="composer-label">Bring your experience.</label><p class="composer-hint">Paste your resume or attach a PDF. Start with the original, not a polished claim.</p><textarea id="resume" placeholder="Paste your resume here. Education, experience, projects, and skills..."></textarea>
-<div class="toolrow intakerow composer-actions"><span class="upl uplbox">Attach PDF <input type="file" id="pdffile" aria-label="Attach resume PDF" disabled accept="application/pdf,.pdf"></span><button id="parse">Parse resume text <span aria-hidden="true">↗</span></button></div><div class="note aiconsent" id="aidisclose" role="note"><span id="aidisclosetext"><strong>Before you upload:</strong> Slate sends the text extracted from your PDF to Groq, an outside AI provider, to write a short explanation of your resume. Do not upload a PDF you do not want sent there. It can be wrong and changes nothing in your resume. You can paste your text instead, which is not sent to the model.</span> <button type="button" id="aiack">I understand, enable PDF upload</button> <span id="aistatus" hidden><strong>Acknowledged for this page session.</strong> PDFs you upload now have their extracted text sent to Groq, as described above. This resets when you sign out, switch account, re-authenticate after a session expiry, or reload.</span></div></div>
+<div class="upload-zone locked" id="uploadzone"><label class="uz-drop" for="pdffile"><span class="uz-badge" id="uzbadge">Locked</span><span class="uz-text"><span class="uz-title">Attach a resume PDF</span><span class="uz-sub" id="uzsub">Unlock with the acknowledgment below first. The PDF&#39;s extracted text goes to Groq for a short explanation.</span></span></label><input type="file" id="pdffile" class="uz-input" aria-label="Attach resume PDF" disabled accept="application/pdf,.pdf"></div><div class="toolrow intakerow composer-actions"><span class="composer-or">Or paste your text above, then</span><button id="parse">Parse resume text <span aria-hidden="true">↗</span></button></div><div class="note aiconsent" id="aidisclose" role="note"><span id="aidisclosetext"><strong>Before you upload:</strong> Slate sends the text extracted from your PDF to Groq, an outside AI provider, to write a short explanation of your resume. Do not upload a PDF you do not want sent there. It can be wrong and changes nothing in your resume. You can paste your text instead, which is not sent to the model.</span> <button type="button" id="aiack" class="sec">I understand, enable PDF upload</button> <span id="aistatus" hidden><strong>Acknowledged for this page session.</strong> PDFs you upload now have their extracted text sent to Groq, as described above. This resets when you sign out, switch account, re-authenticate after a session expiry, or reload.</span></div></div>
 <div class="response-surface"><div class="response-heading"><span aria-hidden="true">✦</span><h2>Source review</h2><span class="mode-label">Phrase extraction</span></div><p id="source-empty" class="empty-hint">Your source review appears here after parsing. Check what was recognized before you make a draft.</p>
 <div id="pdfstatus" class="pdfstatus" role="status" aria-live="polite" hidden></div>
 <div id="parsed" class="msg" aria-live="polite"></div>
@@ -294,7 +320,7 @@ html[data-theme=dark] #loginbox,html[data-theme=dark] #authPanel{background:rgba
 <div class="toolrow"><button id="savetarget">Save new target version</button><button id="drafttarget" class="sec">Create source-preserving draft</button></div>
 </div><div id="targetmsg" class="msg" role="status"></div>
 <div id="roleackt" hidden><p class="note" id="roleacktmsg"></p><label><input type="checkbox" id="roleacktbox"> I understand this target differs from what my resume shows, and I want a factual draft anyway.</label><div><button id="roleacktgo" class="sec">Create draft with original facts</button></div></div>
-<p class="note">This mode keeps the original resume text, including school, work and trade details the parser may miss. It does not rewrite, format a full CV, infer a qualification, or add job requirements as applicant facts. Review skills on the Resume page. Original-source changes require a new parsed resume version; only notes after the preserved block and the cover note can be edited here.</p></section>
+<p class="note">Source-preserving drafts keep your original text as written and never turn job requirements into claims about you. Changing the source itself needs a new parsed resume version; here you can edit only the note after the preserved block and the cover note.</p></section>
 
 <section id="s2" class="off" data-route="comparisons"><h2 id="jobstitle">Sample job comparisons</h2>
 <p class="note" id="jobssub">Demo score = share of a listing's skills found on the resume, over 5 sample listings. The 75% threshold from the deck is not implemented, so nothing here is claimed as a good match.</p>
@@ -366,7 +392,34 @@ async function recoverSignIn(){
   if(!authRecovery) authRecovery=initAuth().finally(()=>{authRecovery=null});
   await authRecovery;
 }
+async function onboardingGate(){
+ // First-login routing, fire-and-forget from signedIn so sign-in rendering
+ // stays synchronous: a brand-new account (no confirmed profile) is redirected
+ // to onboarding once (save or skip both end it). A bare fetch on purpose -
+ // the page's own api() would discard this response as stale when the
+ // post-sign-in reset advances the page epoch. UX guidance only; data access
+ // stays enforced per verified token on every API call.
+ // Failure handling: a 401 is owned by the page's own sign-in recovery, so
+ // leave it alone. Any other failure (network, 5xx) gets one retry; if it
+ // still fails the user stays in place rather than being guessed about - the
+ // gate re-runs on the next page load, so a new user is not silently passed
+ // for good. The token check after every await is the logout/re-sign-in
+ // guard: a stale answer never redirects.
+ const t=token();if(!t)return false;
+ for(let attempt=0;attempt<2;attempt++){
+  let r=null;
+  try{r=await fetch("/v1/profile",{headers:{authorization:"Bearer "+t}})}catch(e){r=null}
+  if(token()!==t)return true;
+  if(r){
+   if(r.status===401)return false;
+   if(r.ok){const p=await r.json();if(p.status==="not_started"){location.replace("/onboarding");return true}return false}
+  }
+  if(attempt===0)await new Promise(res=>setTimeout(res,1500));
+ }
+ return false
+}
 function signedIn(email){
+  onboardingGate();
   resetAccountState();$("loginbox").classList.add("signed");
   $("loginctl").innerHTML="";
   $("loginmsg").innerHTML='<span class="ok">Signed in as '+esc(email||"user")+'</span> <button class="sec" id="out">Sign out</button>';
@@ -377,7 +430,7 @@ async function initAuth(){
   let cfg={mode:"unconfigured"};
   try{cfg=await (await fetch("/v1/config")).json()}catch(e){if(e instanceof StaleResponse)return;}
   const ctl=$("loginctl");
-  if(token()){signedIn();return}
+  const t0=token();if(t0){signedIn(t0.startsWith("dev:")?t0.slice(4):"");return}
   if(cfg.mode==="dev"){
     ctl.innerHTML='<input id="devmail" placeholder="you@example.com"> <button id="devgo">Sign in (local dev)</button>';
     $("devgo").onclick=()=>{const m=$("devmail").value.trim(); if(!m) return;
@@ -423,7 +476,7 @@ const on=id=>$(id).classList.remove("off");
 function say(id,t,bad){$(id).className="msg "+(bad?"bad":"ok");$(id).textContent=t;if(!restoring)rememberSelection()}
 let sourceGeneration=0, sourceRequest=0, draftGeneration=0;
 function resetAccountState(){
-  abortExplain();aiAckToken=null;$("pdffile").disabled=true;$("pdffile").value="";$("aiack").hidden=false;$("aistatus").hidden=true;$("pdfstatus").hidden=true;$("pdfstatus").textContent="";selectionKey=null;restoring=false;sourceDirty=false;
+  abortExplain();aiAckToken=null;$("pdffile").disabled=true;$("pdffile").value="";$("aiack").hidden=false;$("aistatus").hidden=true;const uz0=$("uploadzone");if(uz0){uz0.classList.add("locked");uz0.classList.remove("unlocked");$("uzbadge").textContent="Locked";$("uzsub").textContent="Unlock with the acknowledgment below first. The PDF's extracted text goes to Groq for a short explanation."}$("pdfstatus").hidden=true;$("pdfstatus").textContent="";selectionKey=null;restoring=false;sourceDirty=false;
   sourceRequest++;resetSourceResults();rid=null;targetEpoch++;tid=null;targetParent=null;targetDirty=false;
   ["targettitle","targetorg","targeturl","targettext","targetmsg"].forEach(id=>$(id).value!==undefined?$(id).value="":$(id).textContent="");
   $("savedtargets").innerHTML='<option value="">Choose a saved target</option>';
@@ -589,7 +642,7 @@ $("parse").onclick=async()=>{
   const r=await api("POST","/resume",{text:$("resume").value});if(request!==sourceRequest)return; resetSourceResults();rid=r.resumeId;
   showParsed(r.parsed); await loadSavedVersions();await loadJobs();
 }catch(e){if(e instanceof StaleResponse)return;say("parsed",e.message,1)}finally{if(request===sourceRequest){$("parse").textContent="Parse resume text ↗";$("parse").removeAttribute("aria-busy")}}};
-let aiAckToken=null;$("aiack").onclick=()=>{aiAckToken=token()||"anon";$("pdffile").disabled=false;$("aiack").hidden=true;$("aistatus").hidden=false};
+let aiAckToken=null;$("aiack").onclick=()=>{aiAckToken=token()||"anon";$("pdffile").disabled=false;$("aiack").hidden=true;$("aistatus").hidden=false;const uz=$("uploadzone");if(uz){uz.classList.remove("locked");uz.classList.add("unlocked");$("uzbadge").textContent="Ready";$("uzsub").textContent="Unlocked for this page session. Click here to choose a PDF (max 5 MB, 20 pages, selectable text)."}};
 const aiAcked=()=>aiAckToken!==null&&aiAckToken===(token()||"anon");
 let explainAbort=null;const EXPLAIN_WAIT_MS=8000;
 function abortExplain(){if(explainAbort){explainAbort.abort();explainAbort=null}}
@@ -734,7 +787,7 @@ function updateContextBar(){
  $("context-source").textContent=rid?($("parsed").querySelector("b")?.textContent||"Saved resume"):"No source selected";
  $("context-source-note").textContent=rid?"Saved source · "+rid:"Add your resume in the workspace.";
  $("context-target").textContent=tid?$("targettitle").value:"No target selected";
- $("context-target-note").textContent=tid?"Pasted target · "+tid:"A description you supply, not a verified listing.";
+ $("context-target-note").textContent=tid?"Pasted target, saved in this workspace. Not employer-verified.":"A description you supply, not a verified listing.";
  $("context-draft").textContent=did?did:"No saved draft";
  const unsavedDraft=did&&($("dres").value!==savedRes||$("dnote").value!==savedNote);
  $("context-draft-note").textContent=unsavedDraft?"Unsaved edits. Approval applies only to the saved version.":did?"Status: "+$("status").textContent+". Review before export.":"Nothing is approved or sent automatically.";
@@ -798,5 +851,128 @@ new MutationObserver(place).observe(nav,{subtree:true,attributes:true,attributeF
 function show(){const dark=document.documentElement.dataset.theme==='dark';button.textContent=dark?'Light mode':'Dark mode';button.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');button.setAttribute('aria-pressed',String(dark));}
 button.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('slate_theme',next)}catch(_){}show()});
 window.addEventListener('storage',e=>{if(e.key==='slate_theme'&&(e.newValue==='light'||e.newValue==='dark')){document.documentElement.dataset.theme=e.newValue;show()}});show();})();
+</script>
+<style>
+/* Stage-driven resume flow: one main box shows only the current step. */
+#stagebox{position:relative}
+.stg{display:none}
+.stg.on{display:block}
+@media(prefers-reduced-motion:no-preference){.stg.on{animation:stg-in .26s var(--ease) both}}
+@keyframes stg-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.stg-back{background:none;border:0;color:var(--mut);font-size:12.5px;font-weight:600;padding:6px 0;margin:14px 0 0;cursor:pointer;box-shadow:none;text-align:left}
+.stg-back:hover{color:var(--navy);transform:none;box-shadow:none}
+.stg-hint{color:var(--mut);font-size:13px;max-width:55ch;margin:0 0 20px}
+#stage-err{margin:14px 0 0}
+#stage-err-note{margin:6px 0 0}
+html[data-theme=dark] .stg-back:hover{color:#f5d7ae}
+</style>
+<script>
+/* One main box on the Resume page: input -> (consent) -> processing -> results.
+   Existing nodes are reparented, never duplicated, so every handler, consent
+   reset, saved-source restore and privacy behavior keeps working unchanged. */
+(function(){
+const $=id=>document.getElementById(id);
+const s1=$("s1");if(!s1)return;
+const composer=s1.querySelector(".source-composer"),consent=$("aidisclose"),surface=s1.querySelector(".response-surface"),pdfstatus=$("pdfstatus");
+if(!composer||!consent||!surface)return;
+const box=document.createElement("div");box.id="stagebox";
+s1.insertBefore(box,composer);
+function mkStage(id){const d=document.createElement("div");d.id=id;d.className="stg";box.appendChild(d);return d}
+const stInput=mkStage("stage-input"),stConsent=mkStage("stage-consent"),stProc=mkStage("stage-processing"),stResults=mkStage("stage-results");
+const STAGES={input:stInput,consent:stConsent,processing:stProc,results:stResults};
+let current="input";
+function show(name){if(!STAGES[name]||current===name)return;current=name;for(const k in STAGES)STAGES[k].classList.toggle("on",k===name);
+  /* The progress box must stay visible where the user is looking: it rides
+     with the active stage. On results it sits above the review surface so the
+     AI explanation lines, which arrive after parsing, stay on screen instead
+     of collapsing with the processing stage. */
+  const ps=$("pdfstatus");
+  if(ps){if(name==="processing"&&ps.parentElement!==pCard)pCard.insertBefore(ps,pBack);
+    else if(name==="results"&&!ps.hidden&&ps.textContent.trim()&&ps.parentElement!==surface.parentElement)surface.parentElement.insertBefore(ps,surface)}
+  const y=box.getBoundingClientRect().top+window.scrollY-90;
+  if(window.scrollY>y)window.scrollTo({top:Math.max(0,y),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}
+
+/* input stage: the composer as-is */
+stInput.appendChild(composer);
+
+/* consent stage: ONLY the permission card, nothing else on screen */
+const cCard=document.createElement("div");cCard.className="source-composer";
+const cLabel=document.createElement("div");cLabel.className="composer-label";cLabel.textContent="PDF upload needs your okay first.";
+cCard.appendChild(cLabel);cCard.appendChild(consent);
+const cBack=document.createElement("button");cBack.type="button";cBack.className="stg-back";cBack.textContent="\u2190 Back, paste text instead";
+cBack.addEventListener("click",()=>{show("input");const z=$("uploadzone");if(z)z.focus()});cCard.appendChild(cBack);
+stConsent.appendChild(cCard);
+
+/* processing stage: only progress info */
+const pCard=document.createElement("div");pCard.className="source-composer";
+const pLabel=document.createElement("div");pLabel.className="composer-label";pLabel.textContent="Working on it.";
+const pHint=document.createElement("p");pHint.className="stg-hint";pHint.textContent="Reading your source and checking it with fixed rules. Text leaves this app only where you have explicitly allowed it.";
+pCard.appendChild(pLabel);pCard.appendChild(pHint);
+if(pdfstatus)pCard.appendChild(pdfstatus);
+const pBack=document.createElement("button");pBack.type="button";pBack.className="stg-back";pBack.textContent="\u2190 Back to edit";
+pBack.addEventListener("click",()=>{show("input");const t=$("resume");if(t)t.focus()});pCard.appendChild(pBack);
+stProc.appendChild(pCard);
+
+/* results stage: the review surface opens separately, with edit + continue */
+stResults.appendChild(surface);
+const editB=document.createElement("button");editB.type="button";editB.className="stg-back";editB.textContent="\u2190 Edit source";
+editB.addEventListener("click",()=>{show("input");const t=$("resume");if(t)t.focus()});surface.appendChild(editB);
+const pn=s1.querySelector(".partnext");if(pn)stResults.appendChild(pn);
+const resHead=surface.querySelector(".response-heading h2");if(resHead)resHead.setAttribute("tabindex","-1");
+
+/* hooks */
+const zone=$("uploadzone"),ack=$("aiack"),parseB=$("parse"),fileI=$("pdffile");
+/* The locked zone is a real keyboard-operable trigger: tabbable, named via its
+   visible text, described by the lock explanation, activated with Enter/Space
+   exactly like the click path. Trigger semantics drop once consent enables the
+   native file input, which is itself focusable. Kept in sync with the consent
+   reset paths (sign-out, account switch, expiry, reload) via the disabled attr. */
+function syncZone(){if(!zone||!fileI)return;
+  if(fileI.disabled){zone.setAttribute("tabindex","0");zone.setAttribute("role","button");zone.setAttribute("aria-describedby","uzsub")}
+  else{zone.removeAttribute("tabindex");zone.removeAttribute("role");zone.removeAttribute("aria-describedby")}}
+syncZone();
+if(fileI)new MutationObserver(syncZone).observe(fileI,{attributes:true,attributeFilter:["disabled"]});
+function openConsent(){show("consent");if(ack)ack.focus()}
+if(zone){zone.addEventListener("click",e=>{if(fileI&&fileI.disabled){e.preventDefault();openConsent()}});
+  zone.addEventListener("keydown",e=>{if(fileI&&fileI.disabled&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openConsent()}})}
+if(ack)ack.addEventListener("click",()=>{show("input");if(fileI)fileI.focus()});
+if(parseB)parseB.addEventListener("click",()=>show("processing"));
+if(fileI)fileI.addEventListener("change",()=>{if(fileI.files&&fileI.files.length)show("processing")});
+
+/* Failure + retained-source handling: parse/upload failures write to #parsed via
+   say("parsed", msg, 1). They must never open the results stage (which carries
+   Continue/review controls for a real source). Mirror them into the input stage
+   and say explicitly what happened to any previously saved source. */
+const errBox=document.createElement("div");errBox.id="stage-err";errBox.className="msg bad";errBox.hidden=true;errBox.setAttribute("role","alert");
+const errNote=document.createElement("p");errNote.id="stage-err-note";errNote.className="stg-hint";errNote.hidden=true;
+const chNote=document.createElement("p");chNote.id="stage-note";chNote.className="stg-hint";chNote.hidden=true;
+stInput.appendChild(errBox);stInput.appendChild(errNote);stInput.appendChild(chNote);
+function clearErr(){errBox.hidden=true;errBox.textContent="";errNote.hidden=true;errNote.textContent="";chNote.hidden=true;chNote.textContent=""}
+function clearErrOnType(){errBox.hidden=true;errBox.textContent="";errNote.hidden=true;errNote.textContent=""}
+/* The "source text changed" notice is written straight into #parsed, which lives
+   in the review stage. While editing on the intake stage the writer cannot see
+   it there, so mirror it in place. The observer is the sole owner of chNote:
+   listener-ordered clearing races the microtask checkpoint between listeners. */
+const parsedEl=$("parsed");
+if(parsedEl)new MutationObserver(()=>{const t=parsedEl.textContent.trim();
+  if(current==="input"&&t.indexOf("Source text changed")===0){chNote.textContent=t;chNote.hidden=false}
+  else if(!chNote.hidden){chNote.hidden=true;chNote.textContent=""}})
+  .observe(parsedEl,{childList:true,characterData:true,subtree:true});
+if(typeof say==="function"){const prevSay=say;say=(id,t,bad)=>{prevSay(id,t,bad);
+  if(id==="parsed"&&bad){errBox.textContent=t;errBox.hidden=false;
+    let kept=false;try{kept=!!rid}catch(_){}
+    errNote.textContent=kept?"Nothing new was saved. Your previous source is still saved and unchanged - fix the text or file and try again.":"Nothing was saved. Fix the text or file and try again.";
+    errNote.hidden=false;show("input")}}}
+
+/* results open ONLY on real parse results (showParsed covers parse/upload/restore).
+   Typing in the source or an error write must never switch stages. */
+if(typeof showParsed==="function"){const prevShow=showParsed;showParsed=(...a)=>{clearErr();prevShow(...a);show("results");if(resHead)resHead.focus({preventScroll:true})}}
+const parsed=$("parsed");
+if(parsed&&parsed.textContent.trim())show("results");
+if(parseB)parseB.addEventListener("click",clearErr);
+if(fileI)fileI.addEventListener("change",clearErr);
+const srcTa=$("resume");if(srcTa)srcTa.addEventListener("input",clearErrOnType);
+for(const k in STAGES)STAGES[k].classList.toggle("on",k===current);
+})();
 </script>
 </body></html>

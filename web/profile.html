@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slate · Your profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+(()=>{let theme;try{theme=localStorage.getItem('slate_theme')}catch(_){}if(theme!=="light"&&theme!=="dark")theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=theme})();
+</script>
+<style>
+:root{--navy:#14213d;--navy2:#1d2f55;--blue:#2b5fe3;--blue-ink:#1e4fd0;--blue-soft:#edf2fd;--ink:#131b2e;--mut:#5b6678;--line:#e4e8f0;--soft:#f5f7fb;--card:#fff;--bad:#b3261e;--warn:#8a5a00;--ok:#1e4fd0;--good:#176b42;--radius:16px;--shadow:0 1px 2px rgba(16,24,40,.05),0 6px 20px rgba(16,24,40,.04)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--soft);-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:28px;padding:0 32px;height:64px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:-.03em;flex:none}
+.brand:hover{text-decoration:none}
+.brand span{color:var(--blue)}
+.nav{display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav::-webkit-scrollbar{display:none}
+.nlink{flex:none;padding:7px 12px;border-radius:8px;color:var(--mut);font-size:14px;font-weight:500;white-space:nowrap}
+.nlink:hover{color:var(--navy);background:var(--soft);text-decoration:none}
+.nlink.active{color:var(--blue-ink);background:var(--blue-soft);font-weight:600}
+.content{max-width:920px;margin:0 auto;padding:40px 32px 72px;min-width:0}
+.pagehead{margin:0 0 28px}
+.pagehead h1{font-size:32px;line-height:1.15;margin:0 0 10px;color:var(--navy);letter-spacing:-.03em;font-weight:750}
+p.sub{color:var(--mut);margin:0;font-size:15px;max-width:70ch}
+section,.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin:0 0 18px}
+h2{font-size:17px;margin:0 0 14px;color:var(--navy);font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h2 b{flex:none;display:inline-block;width:24px;height:24px;border-radius:8px;background:var(--navy);color:#fff;text-align:center;font-size:12.5px;line-height:24px;font-weight:600}
+select{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fff;max-width:100%}
+input[type=text],input[type=email],input:not([type]){font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fbfcfe;transition:border-color .15s,box-shadow .15s}
+input[type=file]{max-width:230px;font-size:12.5px}
+input:focus,select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(43,95,227,.14)}
+label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin:14px 0 5px}
+button{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;margin:8px 8px 0 0;transition:background .15s,border-color .15s}
+button:hover{background:var(--navy2)}
+button.sec,button.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}
+button.sec:hover,button.secondary:hover{border-color:var(--navy);background:var(--soft)}
+button:disabled{opacity:.35;cursor:not-allowed}
+button.linklike{background:none;border:0;color:var(--blue-ink);padding:6px 0;font-size:13.5px;box-shadow:none}
+button.linklike:hover{text-decoration:underline;background:none}
+.note{color:var(--mut);font-size:13px;margin:6px 0 8px}
+.status{font-size:14px;margin-top:10px}
+.error{color:var(--bad)}
+.chip{display:inline-block;background:var(--blue-soft);color:var(--blue-ink);border-radius:999px;padding:3px 11px;margin:2px 4px 2px 0;font-size:13px;font-weight:500}
+.banner{border:1px solid #cfdbf5;border-left:3px solid var(--blue);background:var(--blue-soft);border-radius:12px;padding:14px 16px;margin:14px 0 0;font-size:13.5px;color:var(--ink)}
+.hidden{display:none!important}
+.panel label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin:14px 0 5px}
+.panel input,.panel select{font:inherit;width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink);background:#fbfcfe}
+.pagefoot{margin-top:28px;color:var(--mut);font-size:12.5px}
+@media(max-width:720px){
+.topbar{gap:8px;padding:10px 16px;height:auto;flex-wrap:wrap}
+.nav{flex:1 1 100%;flex-wrap:wrap;overflow:visible;gap:2px}
+.nlink{font-size:12px;padding:5px 8px}
+.brand{font-size:19px}
+.content{padding:26px 16px 56px}
+.pagehead h1{font-size:26px}
+section,.panel{padding:18px 16px}
+}
+/* Quiet motion and tinted materials. No looped background animation. */
+:root{--soft:#eaf0f8;--card:rgba(250,252,255,.77);--line:rgba(123,145,185,.22);--blue:#3564de;--blue-soft:#e3eafb;--ease:cubic-bezier(.22,1,.36,1)}
+html{background:#eaf0f8}
+body{background:radial-gradient(ellipse at 4% 6%,rgba(137,164,228,.22),transparent 48%),radial-gradient(ellipse at 94% 35%,rgba(178,163,217,.22),transparent 48%),linear-gradient(145deg,#e8edf7 0%,#eff1f9 45%,#e7edf5 100%);min-height:100vh}
+.topbar{background:rgba(238,243,253,.82);border-bottom-color:rgba(135,155,190,.2);box-shadow:0 1px 18px rgba(38,59,98,.035)}
+section,.panel{background:linear-gradient(145deg,rgba(255,255,255,.8),rgba(242,246,253,.72));border-color:rgba(255,255,255,.85);box-shadow:0 3px 8px rgba(33,52,92,.025),0 18px 46px -24px rgba(39,65,116,.2);border-radius:20px}
+input[type=text],input[type=email],input:not([type]),select{background:rgba(247,250,255,.82);border-color:rgba(131,153,189,.24)}
+button{box-shadow:0 3px 8px rgba(32,51,91,.08);transition:background .18s ease,box-shadow .24s ease,transform .24s var(--ease),border-color .18s ease}
+button:active:not(:disabled){transform:scale(.975);box-shadow:0 1px 3px rgba(32,51,91,.08)}
+button.sec,button.secondary{background:rgba(248,251,255,.8)}
+button.linklike{box-shadow:none}
+.nlink{transition:background .22s ease,color .22s ease,box-shadow .22s ease}
+.nlink.active{background:rgba(255,255,255,.82);box-shadow:0 2px 9px rgba(44,75,145,.11);color:#2454cf}
+.nlink:focus-visible,button:focus-visible{outline:3px solid rgba(53,100,222,.5);outline-offset:3px}
+.pagehead h1{letter-spacing:-.045em}
+@keyframes slate-rise{from{opacity:0;transform:translateY(14px) scale(.996)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:no-preference){.pagehead,.content section.on{animation:slate-rise .6s var(--ease) both}}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 14px rgba(32,51,91,.13)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* ===== Slate canvas layer: quiet left rail, tinted ground ===== */
+:root{--railw:204px}
+body{background:radial-gradient(1100px 740px at -10% -12%,rgba(120,150,230,.32),transparent 62%),radial-gradient(920px 660px at 110% 8%,rgba(188,164,224,.28),transparent 58%),radial-gradient(860px 900px at 80% 114%,rgba(124,166,228,.22),transparent 60%),linear-gradient(160deg,#e7edf7 0%,#eef0f9 45%,#e6ecf6 100%)}
+@media(min-width:861px){
+body{padding-left:var(--railw)}
+.topbar{position:fixed;left:0;top:0;bottom:0;overflow-y:auto;width:var(--railw);height:auto;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:26px;padding:26px 14px;background:linear-gradient(180deg,rgba(244,247,253,.6),rgba(237,242,250,.34));border-bottom:0;border-right:1px solid rgba(123,145,185,.18);box-shadow:none}
+.brand{padding:0 13px;font-size:22px}
+.nav{flex-direction:column;align-items:stretch;gap:3px;overflow:visible}
+.nlink{width:100%;padding:9px 13px}
+.content{max-width:1040px;padding:52px 48px 104px}
+}
+@media(max-width:860px){
+.topbar{gap:6px 16px;padding:10px 16px;height:auto;flex-wrap:wrap}
+.nav{flex:1 1 100%;flex-wrap:wrap;overflow:visible;gap:2px}
+.nlink{font-size:12.5px;padding:6px 9px}
+.content{padding:28px 16px 68px}
+.pagehead h1{font-size:27px}
+}
+.pagehead h1{font-size:clamp(29px,3.4vw,38px);letter-spacing:-.05em}
+button{background:linear-gradient(165deg,#3a6af0,#2b50cd);box-shadow:0 4px 14px rgba(43,90,220,.24),inset 0 1px 0 rgba(255,255,255,.14);border-radius:12px}
+button:hover{background:linear-gradient(165deg,#4172f5,#2f55d6)}
+button.sec,button.secondary{background:rgba(250,252,255,.85);color:var(--navy);border:1px solid rgba(123,145,185,.32);box-shadow:0 2px 6px rgba(32,51,91,.07)}
+button.sec:hover,button.secondary:hover{border-color:var(--navy);background:#fff}
+button.linklike{background:none;border:0;color:var(--blue-ink);box-shadow:none}
+#authPanel:has(#signout){padding:0;background:none;border:0;box-shadow:none;margin:0 0 22px}
+#authPanel:has(#signout)>b{display:none}
+#authPanel:has(#signout) #authControls{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--mut);margin:0}
+#authPanel:has(#signout) button{font-size:12px;margin:0;padding:8px 12px}
+.theme-toggle{background:rgba(250,252,255,.8);border:1px solid var(--line);border-radius:999px;color:var(--navy);font-size:12px;padding:8px 12px;margin:0;box-shadow:none;align-self:flex-start;min-height:40px;white-space:nowrap}
+@media(min-width:901px){.theme-toggle{margin:0 10px}}
+@media(max-width:900px){.theme-toggle{position:absolute;right:16px;top:10px;padding:5px 12px;min-height:36px}}
+html[data-theme=dark]{color-scheme:dark;background:#101722;--navy:#e5ebf7;--navy2:#c8d8f6;--ink:#e0e7f3;--mut:#a6b3c8;--line:rgba(163,185,222,.18);--soft:#1a2537;--card:#192435;--blue:#e0a366;--blue-ink:#f0bc84;--blue-soft:#3d2f22;--bad:#ffada7;--warn:#f2cd82;--ok:#edab6b;--good:#9cdbb9}
+html[data-theme=dark] body{color:var(--ink);background:radial-gradient(ellipse at 14% 5%,rgba(61,88,144,.23),transparent 47%),radial-gradient(ellipse at 92% 30%,rgba(94,74,135,.18),transparent 50%),linear-gradient(145deg,#121c2b,#141b29 55%,#111b28);min-height:100vh}
+html[data-theme=dark] .topbar{background:rgba(18,28,44,.86);border-color:var(--line);box-shadow:none}
+html[data-theme=dark] .nlink.active{color:#f0bc84;background:#453522}
+html[data-theme=dark] .nlink:hover{background:rgba(224,163,102,.12);color:#f0d0a8}
+html[data-theme=dark] section,html[data-theme=dark] .panel{background:rgba(25,37,56,.78);border-color:rgba(153,181,226,.14);box-shadow:0 10px 40px -28px #000}
+html[data-theme=dark] input:not([type=checkbox]),html[data-theme=dark] select{background:#1b293f;color:#e0e7f3;border-color:rgba(163,185,222,.23)}
+html[data-theme=dark] input::placeholder{color:#98a8c1;opacity:1}
+html[data-theme=dark] button{background:#a05e1f;color:#fff;border-color:transparent;box-shadow:0 3px 8px rgba(0,0,0,.14)}
+html[data-theme=dark] button:hover:not(:disabled){background:#b46d27}
+html[data-theme=dark] button.sec,html[data-theme=dark] button.secondary,html[data-theme=dark] button.theme-toggle{background:#24334b;color:#dce7fa;border-color:rgba(163,185,222,.22)}
+html[data-theme=dark] button.sec:hover,html[data-theme=dark] button.secondary:hover,html[data-theme=dark] button.theme-toggle:hover{background:#2d4161}
+html[data-theme=dark] button.linklike{background:none;color:var(--blue-ink);box-shadow:none}
+html[data-theme=dark] .chip{background:#3d2f22;color:#f0c795;border-color:rgba(163,185,222,.24);box-shadow:none}
+html[data-theme=dark] .banner{background:#24304a;color:#d8e2f6;border-color:#54627f}
+html[data-theme=dark] #authPanel{background:rgba(25,37,56,.78);border-color:rgba(153,181,226,.14)}html[data-theme=dark] #authPanel:has(#signout){background:transparent}
+html[data-theme=dark] .error{color:#ffada7}
+html[data-theme=dark] h2 b{background:#453522;color:#f5d7ae}
+
+
+
+/* ===== Onboarding & profile specifics ===== */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:650px){.row{grid-template-columns:1fr}}
+.ansrow{display:flex;align-items:baseline;gap:10px;border-top:1px solid var(--line);padding:11px 2px;min-width:0}
+.ansrow:first-of-type{border-top:0}
+.anslabel{flex:none;width:110px;font-size:13px;font-weight:600;color:var(--navy)}
+.ansval{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.ansval.empty{color:var(--mut)}
+.uplrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px}
+</style>
+<script src="/motion.js" defer></script></head>
+<body>
+<header class="topbar">
+<a class="brand" href="/">Slate<span>.</span></a>
+<nav class="nav" aria-label="Workspace pages"><a class="nlink" href="/resume">Resume</a><a class="nlink" href="/targets">Targets</a><a class="nlink" href="/draft">Draft</a><a class="nlink" href="/comparisons">Sample comparisons</a><a class="nlink" href="/roadmap">Roadmap</a><a class="nlink" href="/interview">Mock interview</a><a class="nlink" href="/ai">AI draft</a><a class="nlink" href="/practice">Practice sheet</a><a class="nlink" href="/projects">Project review</a><a class="nlink active" href="/profile">Profile</a></nav>
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">Dark mode</button></header>
+<div class="content">
+<header class="pagehead">
+<h1>Your profile</h1>
+<p class="sub">The answers Slate reuses across drafts and applications - confirmed by you once, never guessed.</p>
+</header>
+<section class="panel" id="authPanel"><b>Sign in</b><div id="authControls" class="status">Checking sign-in configuration…</div><div id="authMessage" class="status"></div></section>
+
+<section class="panel" id="viewPanel">
+<h2><b>1</b> Saved answers</h2>
+<p class="note" id="profileNote">Sign in to see your profile.</p>
+<div id="ansRows"></div>
+<button id="editBtn" type="button" disabled>Edit answers</button>
+<div id="viewStatus" class="status"></div>
+</section>
+
+<section class="panel hidden" id="editPanel">
+<h2><b>2</b> Edit answers</h2>
+<p class="note">All fields are optional. Clearing a field removes that answer - it goes back to <b>Not added</b> and is never filled from a guess. Saved answers are your own statements; Slate does not independently verify them.</p>
+<div class="uplrow"><button class="secondary" id="fillResume" type="button" hidden>Fill from my saved resume</button><span id="sugNote" class="note"></span></div>
+<div class="row">
+<div><label for="pf-name">Name</label><input id="pf-name" maxlength="120" autocomplete="name"></div>
+<div><label for="pf-email">Email</label><input id="pf-email" type="email" maxlength="254" autocomplete="email"></div>
+</div>
+<div class="row">
+<div><label for="pf-phone">Phone</label><input id="pf-phone" maxlength="40" autocomplete="tel"></div>
+<div><label for="pf-location">Location</label><input id="pf-location" maxlength="120" autocomplete="address-level2"></div>
+</div>
+<div class="row">
+<div><label for="pf-linkedin">LinkedIn</label><input id="pf-linkedin" maxlength="300" placeholder="https://www.linkedin.com/in/..."></div>
+<div><label for="pf-github">GitHub</label><input id="pf-github" maxlength="300" placeholder="https://github.com/..."></div>
+</div>
+<label for="pf-portfolio">Portfolio</label><input id="pf-portfolio" maxlength="300" placeholder="https://...">
+<div>
+<button id="saveBtn" type="button">Save changes</button>
+<button class="secondary" id="cancelBtn" type="button">Cancel</button>
+</div>
+<div id="editStatus" class="status"></div>
+</section>
+
+<div class="pagefoot">Slate demo build.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+let token=()=>sessionStorage.getItem("slate_token")||"";
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function msg(id,text,error=false){$(id).textContent=text;$(id).className="status "+(error?"error":"")}
+let contextEpoch=0,busy=false;
+class StaleResponse extends Error{}
+function context(){return {epoch:contextEpoch,auth:token()}}
+function current(c){return c.epoch===contextEpoch&&c.auth===token()}
+async function recoverSignIn(){sessionStorage.removeItem("slate_token");resetPage();await initAuth();msg("authMessage","Sign-in expired. Sign in again; no action was retried.",true)}
+async function api(path,method="GET",body){
+ const c=context(),headers={};if(c.auth)headers.Authorization="Bearer "+c.auth;if(body!==undefined)headers["Content-Type"]="application/json";
+ let response,raw;
+ try{response=await fetch("/v1"+path,{method,headers,body:body!==undefined?JSON.stringify(body):undefined});raw=await response.text()}
+ catch(e){if(!current(c))throw new StaleResponse();throw new Error("Cannot reach Slate API. Check the connection and try again; nothing was automatically retried.")}
+ if(!current(c))throw new StaleResponse();
+ if(response.status===401){await recoverSignIn();throw new StaleResponse()}
+ let data={};if(raw){try{data=JSON.parse(raw)}catch(e){throw new Error("Slate API returned a non-JSON response (HTTP "+response.status+"). Check the server and retry deliberately.")}}
+ if(!response.ok)throw new Error(data.error?.message||"Request failed ("+response.status+")");return data;
+}
+const PROFIELDS=["name","email","phone","location","linkedin","github","portfolio"];
+const FIELDLABEL={name:"Name",email:"Email",phone:"Phone",location:"Location",linkedin:"LinkedIn",github:"GitHub",portfolio:"Portfolio"};
+const LINKFIELDS=["linkedin","github","portfolio"];
+function signedIn(email){
+ resetPage();$("authControls").innerHTML="Signed in as "+esc(email||"local user")+' <button class="secondary" id="signout">Sign out</button>';$("authMessage").textContent="";
+ $("signout").onclick=async()=>{sessionStorage.removeItem("slate_token");resetPage();await initAuth()};
+ afterSignIn();
+}
+async function initAuth(){
+ let cfg;try{cfg=await (await fetch("/v1/config")).json()}catch(e){msg("authControls","Cannot reach API.",true);return}
+ if(token()){signedIn();return}
+ if(cfg.mode==="dev"){
+  $("authControls").innerHTML='<input id="devEmail" placeholder="you@example.com"><button id="devSignIn">Sign in (local development)</button>';
+  $("devSignIn").onclick=()=>{const email=$("devEmail").value.trim();if(!email)return;sessionStorage.setItem("slate_token","dev:"+email);signedIn(email)}
+ }else if(cfg.mode==="google"){
+  $("authControls").innerHTML='<div id="googleButton"></div>';
+  const render=()=>google.accounts.id.initialize({client_id:cfg.googleClientId,callback:r=>{sessionStorage.setItem("slate_token",r.credential);signedIn()}}),button=()=>google.accounts.id.renderButton($("googleButton"),{theme:"outline",size:"large"});
+  const s=document.createElement("script");s.src="https://accounts.google.com/gsi/client";s.onload=()=>{render();button()};document.head.appendChild(s)
+ }else if(cfg.mode==="supabase"){
+  $("authControls").innerHTML='<button id="sbSignIn">Sign in with Google</button>';
+  const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";s.onload=()=>{const sb=supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);$("sbSignIn").onclick=()=>sb.auth.signInWithOAuth({provider:"google"})};document.head.appendChild(s)
+ }else{
+  msg("authControls","Sign-in is not configured. For local development set SLATE_DEV_AUTH=1 before starting Uvicorn.",true)
+ }
+}
+
+let latestResumeId=null,latestResumeName="",currentAnswers={};
+function resetPage(){
+ contextEpoch++;busy=false;latestResumeId=null;currentAnswers={};
+ PROFIELDS.forEach(f=>{const el=$("pf-"+f);if(el)el.value=""});
+ ["viewStatus","editStatus","sugNote"].forEach(id=>$(id).textContent="");
+ $("profileNote").textContent="Sign in to see your profile.";$("ansRows").innerHTML="";
+ $("fillResume").hidden=true;$("fillResume").disabled=false;$("saveBtn").disabled=false;
+ $("editBtn").disabled=true;$("editPanel").classList.add("hidden");$("editPanel").classList.remove("on");
+ $("viewPanel").classList.remove("hidden");
+}
+function renderView(p){
+ currentAnswers=p.answers||{};
+ const n=Object.keys(currentAnswers).length;
+ $("ansRows").innerHTML=PROFIELDS.map(f=>{
+  const v=currentAnswers[f];const link=v&&LINKFIELDS.includes(f);
+  return '<div class="ansrow"><span class="anslabel">'+FIELDLABEL[f]+'</span><span class="ansval'+(v?'':' empty')+'">'+(v?(link?'<a href="'+esc(v)+'" target="_blank" rel="noopener">'+esc(v)+'</a>':esc(v)):'Not added')+'</span></div>'}).join("");
+ $("profileNote").textContent=n?
+  "Saved on this account. These answers are what you told Slate - they are not independently verified. Fields without an answer stay Not added and are never guessed.":
+  (p.status==="user_confirmed"?
+   "You skipped setup, so Slate has no saved answers for you yet. Use Edit answers to add them.":
+   "No profile yet. Use Edit answers to add your answers - Slate reuses them and never guesses blanks.");
+ $("editBtn").disabled=false;
+}
+async function loadView(){const p=await api("/profile");renderView(p)}
+async function afterSignIn(){
+ try{await loadView()}catch(e){if(e instanceof StaleResponse)return;msg("viewStatus",e.message,true);return}
+ try{
+  const r=await api("/resume");const list=r.resumes||[];
+  if(list.length){latestResumeId=list[0].resumeId;latestResumeName=list[0].name||"your saved resume";
+   $("fillResume").hidden=false;$("fillResume").textContent="Fill from my saved resume ("+latestResumeName+")"}
+ }catch(e){if(e instanceof StaleResponse)throw e}
+}
+$("editBtn").onclick=()=>{
+ PROFIELDS.forEach(f=>{$("pf-"+f).value=currentAnswers[f]||""});
+ ["editStatus","sugNote"].forEach(id=>$(id).textContent="");
+ $("editPanel").classList.remove("hidden");$("editPanel").classList.add("on");
+ $("viewPanel").classList.add("hidden");$("pf-name").focus();
+};
+$("cancelBtn").onclick=()=>{
+ $("editPanel").classList.add("hidden");$("editPanel").classList.remove("on");
+ $("viewPanel").classList.remove("hidden");
+};
+$("fillResume").onclick=async()=>{
+ if(busy||!latestResumeId)return;const c=context();busy=true;
+ try{$("fillResume").disabled=true;
+  const s=await api("/profile/suggestions?resumeId="+encodeURIComponent(latestResumeId));
+  const sug=s.suggestions||{},filled=[];
+  PROFIELDS.forEach(f=>{if(sug[f]&&!$("pf-"+f).value){$("pf-"+f).value=sug[f];filled.push(FIELDLABEL[f])}});
+  $("sugNote").textContent=filled.length?("Review candidates found in "+latestResumeName+": "+filled.join(", ")+". Edit anything before saving - nothing is saved until you press Save changes."):("No contact details found in "+latestResumeName+".");
+ }catch(e){if(e instanceof StaleResponse)return;$("sugNote").textContent=e.message}
+ finally{if(current(c)){busy=false;$("fillResume").disabled=false}}
+};
+$("saveBtn").onclick=async()=>{
+ if(busy)return;const c=context();busy=true;
+ try{$("saveBtn").disabled=true;msg("editStatus","Saving your answers…");
+  const answers={};PROFIELDS.forEach(f=>{const v=$("pf-"+f).value.trim();if(v)answers[f]=v});
+  const p=await api("/profile","POST",{answers,confirm:true});
+  renderView(p);
+  $("editPanel").classList.add("hidden");$("editPanel").classList.remove("on");
+  $("viewPanel").classList.remove("hidden");msg("viewStatus","Saved.");
+ }catch(e){if(e instanceof StaleResponse)return;msg("editStatus",e.message,true)}
+ finally{if(current(c)){busy=false;$("saveBtn").disabled=false}}
+};
+
+(()=>{const t=$("theme-toggle");const apply=()=>{const d=document.documentElement.dataset.theme==="dark";t.textContent=d?"Light mode":"Dark mode";t.setAttribute("aria-label",d?"Switch to light mode":"Switch to dark mode")};t.onclick=()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==="dark"?"light":"dark";try{localStorage.setItem("slate_theme",document.documentElement.dataset.theme)}catch(_){}apply()};apply()})();
+initAuth();
+</script>
+</body></html>
