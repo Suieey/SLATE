@@ -26,6 +26,11 @@ with tempfile.TemporaryDirectory() as tmp:
                 break
             except Exception:
                 time.sleep(.1)
+        # Onboarding gate: this check's synthetic users have already made the one-time
+        # setup decision (empty confirmed profile), so sign-in lands on the page under test.
+        for _email in ['motion@example.com', 'njordan@example.com']:
+            _req=urllib.request.Request("http://127.0.0.1:8029/v1/profile",data=b'{"answers":{},"confirm":true}',headers={"Authorization":"Bearer dev:"+_email,"Content-Type":"application/json"},method="POST")
+            urllib.request.urlopen(_req,timeout=5).read()
         assert urllib.request.urlopen('http://127.0.0.1:8029/motion.js', timeout=2).status == 200
         with sync_playwright() as pw:
             browser = pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH', '/usr/bin/google-chrome'), args=['--no-sandbox'])
@@ -99,6 +104,8 @@ with tempfile.TemporaryDirectory() as tmp:
             if page.locator('#devmail').count():
                 page.fill('#devmail', 'motion@example.com')
                 page.click('#devgo')
+            if page.locator('#stage-results.on').count():
+                page.click('#stage-results .stg-back')  # restored session opens the review stage; return to intake before editing
             page.fill('#resume', RESUME)
             page.click('#parse')
             page.wait_for_selector('#parsed .chip')

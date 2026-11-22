@@ -45,6 +45,11 @@ with tempfile.TemporaryDirectory() as tmp:
                 break
             except Exception:
                 time.sleep(.1)
+        # Onboarding gate: this check's synthetic users have already made the one-time
+        # setup decision (empty confirmed profile), so sign-in lands on the page under test.
+        for _email in ['first@example.com', 'second@example.com', 'context@example.com', 'pdf-context@example.com', 'save-snapshot@example.com', 'source-edit@example.com', 'fixture@example.com']:
+            _req=urllib.request.Request("http://127.0.0.1:8014/v1/profile",data=b'{"answers":{},"confirm":true}',headers={"Authorization":"Bearer dev:"+_email,"Content-Type":"application/json"},method="POST")
+            urllib.request.urlopen(_req,timeout=5).read()
         with sync_playwright() as pw:
             browser = pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH', '/usr/bin/google-chrome'), args=['--no-sandbox'])
             for path in ('/', '/ai'):
@@ -134,11 +139,15 @@ with tempfile.TemporaryDirectory() as tmp:
             page.locator('#resume').fill('Alex Example\nSkills: Python, communication')
             page.locator('#parse').click()
             page.wait_for_function('document.querySelector("#parsed").textContent.includes("Alex Example")')
+            page.locator('#stage-results .stg-back').click()  # review stage -> intake, deliberate path
+            page.locator('#uploadzone').click()
+            page.wait_for_selector('#stage-consent.on')
             page.locator('#aiack').click()
             page.locator('#pdffile').set_input_files({'name':'synthetic.pdf','mimeType':'application/pdf','buffer':make_pdf(['Blake Example','Skills: SQL, communication'])})
             page.wait_for_function('document.querySelector("#parsed").textContent.includes("Blake Example")')
             assert 'Blake Example' in page.locator('#resume').input_value()
             assert 'Alex Example' not in page.locator('#resume').input_value()
+            page.locator('#stage-results .stg-back').click()  # review stage -> intake before re-parsing
             page.locator('#parse').click()
             page.wait_for_function('rid==="res_003"')
             assert 'Blake Example' in page.locator('#parsed').inner_text()
@@ -168,13 +177,17 @@ with tempfile.TemporaryDirectory() as tmp:
                             page.locator('#gen').click()
                             page.wait_for_function('draftId!==null')
                     page.evaluate('routePage("resume")') if path=='/' else None
+                    if path=='/':
+                        # stage flow: return to intake from whichever stage is showing
+                        if page.locator('#stage-results.on').count(): page.locator('#stage-results .stg-back').click()
+                        elif page.locator('#stage-processing.on').count(): page.locator('#stage-processing .stg-back').click()
                     page.locator('#resume').fill('Blake Example\nSkills: wound care, patient assessment')
                     if pending_parse:
                         response = held[0].fetch()
                         held[0].fulfill(response=response)
                         page.wait_for_timeout(60)
                     assert page.evaluate('rid===null && did===null' if path=='/' else 'resumeId===null && draftId===null')
-                    assert 'Source text changed' in page.locator('#parsed').inner_text()
+                    assert 'Source text changed' in (page.locator('#stage-note').inner_text() if path=='/' else page.locator('#parsed').inner_text())
                     assert 'off' in page.locator('#s2').get_attribute('class').split()
                     assert 'off' in page.locator('#s3').get_attribute('class').split()
                     assert 'Blake Example' in page.locator('#resume').input_value()
@@ -197,7 +210,7 @@ with tempfile.TemporaryDirectory() as tmp:
                     if request.method == 'POST': writes.append(request.url)
                 page.on('request', record_write)
                 page.goto('http://127.0.0.1:8014/ai#'+fragment)
-                page.get_by_text('Signed in as user', exact=False).wait_for()
+                page.get_by_text('Signed in as fixture@example.com', exact=False).wait_for()  # unified label shows the dev account
                 page.wait_for_timeout(200)
                 assert not writes, writes
                 page.close()

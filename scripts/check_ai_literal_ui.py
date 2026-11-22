@@ -12,6 +12,11 @@ with tempfile.TemporaryDirectory() as d:
   for _ in range(100):
    try:urllib.request.urlopen('http://127.0.0.1:8017/v1/config');break
    except Exception:time.sleep(.1)
+  # Onboarding gate: this check's synthetic users have already made the one-time
+  # setup decision (empty confirmed profile), so sign-in lands on the page under test.
+  for _email in ['fixture@example.com']:
+      _req=urllib.request.Request("http://127.0.0.1:8017/v1/profile",data=b'{"answers":{},"confirm":true}',headers={"Authorization":"Bearer dev:"+_email,"Content-Type":"application/json"},method="POST")
+      urllib.request.urlopen(_req,timeout=5).read()
   with sync_playwright() as pw:
    b=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH','/usr/bin/google-chrome'),args=['--no-sandbox']);page=b.new_page(viewport={'width':1100,'height':1100});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
    import json

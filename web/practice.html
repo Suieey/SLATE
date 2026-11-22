@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slate · Company practice sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+(()=>{let theme;try{theme=localStorage.getItem('slate_theme')}catch(_){}if(theme!=="light"&&theme!=="dark")theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=theme})();
+</script>
+<style>
+:root{--navy:#14213d;--navy2:#1d2f55;--blue:#2b5fe3;--blue-ink:#1e4fd0;--blue-soft:#edf2fd;--ink:#131b2e;--mut:#5b6678;--line:#e4e8f0;--soft:#f5f7fb;--card:#fff;--bad:#b3261e;--warn:#8a5a00;--ok:#1e4fd0;--good:#176b42;--radius:16px;--shadow:0 1px 2px rgba(16,24,40,.05),0 6px 20px rgba(16,24,40,.04)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--soft);-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:28px;padding:0 32px;height:64px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:-.03em;flex:none}
+.brand:hover{text-decoration:none}
+.brand span{color:var(--blue)}
+.nav{display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav::-webkit-scrollbar{display:none}
+.nlink{flex:none;padding:7px 12px;border-radius:8px;color:var(--mut);font-size:14px;font-weight:500;white-space:nowrap}
+.nlink:hover{color:var(--navy);background:var(--soft);text-decoration:none}
+.nlink.active{color:var(--blue-ink);background:var(--blue-soft);font-weight:600}
+.content{max-width:920px;margin:0 auto;padding:40px 32px 72px;min-width:0}
+.pagehead{margin:0 0 28px}
+.pagehead h1{font-size:32px;line-height:1.15;margin:0 0 10px;color:var(--navy);letter-spacing:-.03em;font-weight:750}
+p.sub{color:var(--mut);margin:0;font-size:15px;max-width:70ch}
+section,.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin:0 0 18px}
+h2{font-size:17px;margin:0 0 14px;color:var(--navy);font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h2 b{flex:none;display:inline-block;width:24px;height:24px;border-radius:8px;background:var(--navy);color:#fff;text-align:center;font-size:12.5px;line-height:24px;font-weight:600}
+select{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fff;max-width:100%}
+input[type=text],input[type=email],input:not([type]){font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fbfcfe;transition:border-color .15s,box-shadow .15s}
+input[type=file]{max-width:230px;font-size:12.5px}
+input:focus,select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(43,95,227,.14)}
+label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin:14px 0 5px}
+button{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;margin:8px 8px 0 0;transition:background .15s,border-color .15s}
+button:hover{background:var(--navy2)}
+button.sec,button.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}
+button.sec:hover,button.secondary:hover{border-color:var(--navy);background:var(--soft)}
+button:disabled{opacity:.35;cursor:not-allowed}
+button.linklike{background:none;border:0;color:var(--blue-ink);padding:6px 0;font-size:13.5px;box-shadow:none}
+button.linklike:hover{text-decoration:underline;background:none}
+.note{color:var(--mut);font-size:13px;margin:6px 0 8px}
+.status{font-size:14px;margin-top:10px}
+.error{color:var(--bad)}
+.chip{display:inline-block;background:var(--blue-soft);color:var(--blue-ink);border-radius:999px;padding:3px 11px;margin:2px 4px 2px 0;font-size:13px;font-weight:500}
+.banner{border:1px solid #cfdbf5;border-left:3px solid var(--blue);background:var(--blue-soft);border-radius:12px;padding:14px 16px;margin:14px 0 0;font-size:13.5px;color:var(--ink)}
+.hidden{display:none!important}
+.panel label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin:14px 0 5px}
+.panel input,.panel select{font:inherit;width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink);background:#fbfcfe}
+.pagefoot{margin-top:28px;color:var(--mut);font-size:12.5px}
+@media(max-width:720px){
+.topbar{gap:8px;padding:10px 16px;height:auto;flex-wrap:wrap}
+.nav{flex:1 1 100%;flex-wrap:wrap;overflow:visible;gap:2px}
+.nlink{font-size:12px;padding:5px 8px}
+.brand{font-size:19px}
+.content{padding:26px 16px 56px}
+.pagehead h1{font-size:26px}
+section,.panel{padding:18px 16px}
+}
+/* Quiet motion and tinted materials. No looped background animation. */
+:root{--soft:#eaf0f8;--card:rgba(250,252,255,.77);--line:rgba(123,145,185,.22);--blue:#3564de;--blue-soft:#e3eafb;--ease:cubic-bezier(.22,1,.36,1)}
+html{background:#eaf0f8}
+body{background:radial-gradient(ellipse at 4% 6%,rgba(137,164,228,.22),transparent 48%),radial-gradient(ellipse at 94% 35%,rgba(178,163,217,.22),transparent 48%),linear-gradient(145deg,#e8edf7 0%,#eff1f9 45%,#e7edf5 100%);min-height:100vh}
+.topbar{background:rgba(238,243,253,.82);border-bottom-color:rgba(135,155,190,.2);box-shadow:0 1px 18px rgba(38,59,98,.035)}
+section,.panel{background:linear-gradient(145deg,rgba(255,255,255,.8),rgba(242,246,253,.72));border-color:rgba(255,255,255,.85);box-shadow:0 3px 8px rgba(33,52,92,.025),0 18px 46px -24px rgba(39,65,116,.2);border-radius:20px}
+input[type=text],input[type=email],input:not([type]),select{background:rgba(247,250,255,.82);border-color:rgba(131,153,189,.24)}
+button{box-shadow:0 3px 8px rgba(32,51,91,.08);transition:background .18s ease,box-shadow .24s ease,transform .24s var(--ease),border-color .18s ease}
+button:active:not(:disabled){transform:scale(.975);box-shadow:0 1px 3px rgba(32,51,91,.08)}
+button.sec,button.secondary{background:rgba(248,251,255,.8)}
+button.linklike{box-shadow:none}
+.nlink{transition:background .22s ease,color .22s ease,box-shadow .22s ease}
+.nlink.active{background:rgba(255,255,255,.82);box-shadow:0 2px 9px rgba(44,75,145,.11);color:#2454cf}
+.nlink:focus-visible,button:focus-visible{outline:3px solid rgba(53,100,222,.5);outline-offset:3px}
+.pagehead h1{letter-spacing:-.045em}
+@keyframes slate-rise{from{opacity:0;transform:translateY(14px) scale(.996)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:no-preference){.pagehead,.content section.on{animation:slate-rise .6s var(--ease) both}}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 14px rgba(32,51,91,.13)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* ===== Slate canvas layer: quiet left rail, tinted ground ===== */
+:root{--railw:204px}
+body{background:radial-gradient(1100px 740px at -10% -12%,rgba(120,150,230,.32),transparent 62%),radial-gradient(920px 660px at 110% 8%,rgba(188,164,224,.28),transparent 58%),radial-gradient(860px 900px at 80% 114%,rgba(124,166,228,.22),transparent 60%),linear-gradient(160deg,#e7edf7 0%,#eef0f9 45%,#e6ecf6 100%)}
+@media(min-width:861px){
+body{padding-left:var(--railw)}
+.topbar{position:fixed;left:0;top:0;bottom:0;overflow-y:auto;width:var(--railw);height:auto;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:26px;padding:26px 14px;background:linear-gradient(180deg,rgba(244,247,253,.6),rgba(237,242,250,.34));border-bottom:0;border-right:1px solid rgba(123,145,185,.18);box-shadow:none}
+.brand{padding:0 13px;font-size:22px}
+.nav{flex-direction:column;align-items:stretch;gap:3px;overflow:visible}
+.nlink{width:100%;padding:9px 13px}
+.content{max-width:1040px;padding:52px 48px 104px}
+}
+@media(max-width:860px){
+.topbar{gap:6px 16px;padding:10px 16px;height:auto;flex-wrap:wrap}
+.nav{flex:1 1 100%;flex-wrap:wrap;overflow:visible;gap:2px}
+.nlink{font-size:12.5px;padding:6px 9px}
+.content{padding:28px 16px 68px}
+.pagehead h1{font-size:27px}
+}
+.pagehead h1{font-size:clamp(29px,3.4vw,38px);letter-spacing:-.05em}
+button{background:linear-gradient(165deg,#3a6af0,#2b50cd);box-shadow:0 4px 14px rgba(43,90,220,.24),inset 0 1px 0 rgba(255,255,255,.14);border-radius:12px}
+button:hover{background:linear-gradient(165deg,#4172f5,#2f55d6)}
+button.sec,button.secondary{background:rgba(250,252,255,.85);color:var(--navy);border:1px solid rgba(123,145,185,.32);box-shadow:0 2px 6px rgba(32,51,91,.07)}
+button.sec:hover,button.secondary:hover{border-color:var(--navy);background:#fff}
+button.linklike{background:none;border:0;color:var(--blue-ink);box-shadow:none}
+#authPanel:has(#signout){padding:0;background:none;border:0;box-shadow:none;margin:0 0 22px}
+#authPanel:has(#signout)>b{display:none}
+#authPanel:has(#signout) #authControls{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--mut);margin:0}
+#authPanel:has(#signout) button{font-size:12px;margin:0;padding:8px 12px}
+.theme-toggle{background:rgba(250,252,255,.8);border:1px solid var(--line);border-radius:999px;color:var(--navy);font-size:12px;padding:8px 12px;margin:0;box-shadow:none;align-self:flex-start;min-height:40px;white-space:nowrap}
+@media(min-width:901px){.theme-toggle{margin:0 10px}}
+@media(max-width:900px){.theme-toggle{position:absolute;right:16px;top:10px;padding:5px 12px;min-height:36px}}
+html[data-theme=dark]{color-scheme:dark;background:#101722;--navy:#e5ebf7;--navy2:#c8d8f6;--ink:#e0e7f3;--mut:#a6b3c8;--line:rgba(163,185,222,.18);--soft:#1a2537;--card:#192435;--blue:#e0a366;--blue-ink:#f0bc84;--blue-soft:#3d2f22;--bad:#ffada7;--warn:#f2cd82;--ok:#edab6b;--good:#9cdbb9}
+html[data-theme=dark] body{color:var(--ink);background:radial-gradient(ellipse at 14% 5%,rgba(61,88,144,.23),transparent 47%),radial-gradient(ellipse at 92% 30%,rgba(94,74,135,.18),transparent 50%),linear-gradient(145deg,#121c2b,#141b29 55%,#111b28);min-height:100vh}
+html[data-theme=dark] .topbar{background:rgba(18,28,44,.86);border-color:var(--line);box-shadow:none}
+html[data-theme=dark] .nlink.active{color:#f0bc84;background:#453522}
+html[data-theme=dark] .nlink:hover{background:rgba(224,163,102,.12);color:#f0d0a8}
+html[data-theme=dark] section,html[data-theme=dark] .panel{background:rgba(25,37,56,.78);border-color:rgba(153,181,226,.14);box-shadow:0 10px 40px -28px #000}
+html[data-theme=dark] input:not([type=checkbox]),html[data-theme=dark] select{background:#1b293f;color:#e0e7f3;border-color:rgba(163,185,222,.23)}
+html[data-theme=dark] input::placeholder{color:#98a8c1;opacity:1}
+html[data-theme=dark] button{background:#a05e1f;color:#fff;border-color:transparent;box-shadow:0 3px 8px rgba(0,0,0,.14)}
+html[data-theme=dark] button:hover:not(:disabled){background:#b46d27}
+html[data-theme=dark] button.sec,html[data-theme=dark] button.secondary,html[data-theme=dark] button.theme-toggle{background:#24334b;color:#dce7fa;border-color:rgba(163,185,222,.22)}
+html[data-theme=dark] button.sec:hover,html[data-theme=dark] button.secondary:hover,html[data-theme=dark] button.theme-toggle:hover{background:#2d4161}
+html[data-theme=dark] button.linklike{background:none;color:var(--blue-ink);box-shadow:none}
+html[data-theme=dark] .chip{background:#3d2f22;color:#f0c795;border-color:rgba(163,185,222,.24);box-shadow:none}
+html[data-theme=dark] .banner{background:#24304a;color:#d8e2f6;border-color:#54627f}
+html[data-theme=dark] #authPanel{background:rgba(25,37,56,.78);border-color:rgba(153,181,226,.14)}html[data-theme=dark] #authPanel:has(#signout){background:transparent}
+html[data-theme=dark] .error{color:#ffada7}
+html[data-theme=dark] h2 b{background:#453522;color:#f5d7ae}
+
+/* ===== Practice sheet specifics ===== */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row input{width:100%}
+@media(max-width:650px){.row{grid-template-columns:1fr}}
+.uplrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px}
+.foundchip{cursor:pointer;border:1px solid rgba(123,145,185,.35)}
+.foundchip:hover{border-color:var(--navy)}
+.profilecard{margin-top:14px}
+.profilecard .pname{font-size:19px;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.profilecard .pmeta{color:var(--mut);font-size:13.5px;margin-top:2px}
+.countgrid{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.countbox{flex:1 1 90px;background:rgba(247,250,255,.75);border:1px solid rgba(123,145,185,.25);border-radius:12px;padding:10px 12px;text-align:center}
+.countbox b{display:block;font-size:20px;color:var(--navy)}
+.countbox span{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+html[data-theme=dark] .countbox{background:#1d2c44;border-color:rgba(163,185,222,.2)}
+html[data-theme=dark] .countbox b{color:var(--navy)}
+.orline{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:12.5px;margin:18px 0 4px}
+.orline::before,.orline::after{content:"";flex:1;border-top:1px solid var(--line)}
+.qrow{display:flex;align-items:baseline;gap:10px;border-top:1px solid var(--line);padding:11px 2px;min-width:0}
+.qrow:first-of-type{border-top:0}
+.qnum{flex:none;width:26px;text-align:right;color:var(--mut);font-size:13px}
+.qmain{flex:1 1 auto;min-width:0}
+.qtitle{font-weight:600;color:var(--navy);overflow-wrap:anywhere}
+.qsub{font-size:12.5px;color:var(--mut);margin-top:1px}
+.qstat{flex:none;font-size:12px;font-weight:600;border-radius:999px;padding:3px 11px;white-space:nowrap}
+.qstat.recent{background:var(--blue-soft);color:var(--blue-ink);border:1px solid rgba(53,100,222,.3)}
+.qstat.unknown{background:transparent;color:var(--mut);border:1px solid var(--line)}
+.dtag{display:inline-block;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:0 8px;font-size:11.5px;font-weight:600;margin-left:6px}
+html[data-theme=dark] .qtitle{color:var(--navy)}
+html[data-theme=dark] .qstat.recent{background:#3d2f22;color:#f0c795;border-color:rgba(163,185,222,.3)}
+.sheettools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px}
+.provline{font-size:12.5px;color:var(--mut);margin:0 0 14px}
+.backrow{margin-bottom:6px}
+</style>
+<script src="/motion.js" defer></script></head>
+<body>
+<header class="topbar">
+<a class="brand" href="/">Slate<span>.</span></a>
+<nav class="nav" aria-label="Workspace pages"><a class="nlink" href="/resume">Resume</a><a class="nlink" href="/targets">Targets</a><a class="nlink" href="/draft">Draft</a><a class="nlink" href="/comparisons">Sample comparisons</a><a class="nlink" href="/roadmap">Roadmap</a><a class="nlink" href="/interview">Mock interview</a><a class="nlink" href="/ai">AI draft</a><a class="nlink active" href="/practice">Practice sheet</a><a class="nlink" href="/projects">Project review</a><a class="nlink" href="/profile">Profile</a></nav>
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">Dark mode</button></header>
+<div class="content">
+<header class="pagehead">
+<h1>Company practice sheet</h1>
+<p class="sub">Builds a practice list for the company you are applying to, using your public LeetCode profile and a permitted question sheet.</p>
+</header>
+<section class="panel" id="authPanel"><b>Sign in</b><div id="authControls" class="status">Checking sign-in configuration…</div><div id="authMessage" class="status"></div></section>
+
+<section class="panel on" id="stage-profile">
+<h2><b>1</b> Find your LeetCode profile</h2>
+<p class="note">Slate can find the LeetCode link inside your resume - including links hidden behind a name or icon in the PDF - or you can type the username yourself. Only the username is looked up; no resume content leaves this server.</p>
+<div class="uplrow">
+<button class="secondary" id="scanSaved">Scan my saved resumes</button>
+<input type="file" id="pdfScan" accept="application/pdf,.pdf" aria-label="Resume PDF to scan for a LeetCode link">
+<button class="secondary" id="scanPdf">Scan this PDF</button>
+</div>
+<div id="foundList" class="status"></div>
+<label for="lcInput">LeetCode username or profile link</label>
+<input type="text" id="lcInput" placeholder="e.g. https://leetcode.com/u/your-name/ or your-name" maxlength="200">
+<button id="lookup">Look up public profile</button>
+<div id="lookupStatus" class="status"></div>
+<div id="profileCard" class="profilecard hidden">
+<div class="pname" id="pName"></div>
+<div class="pmeta" id="pMeta"></div>
+<div class="countgrid">
+<div class="countbox"><b id="cAll">0</b><span>solved</span></div>
+<div class="countbox"><b id="cEasy">0</b><span>easy</span></div>
+<div class="countbox"><b id="cMed">0</b><span>medium</span></div>
+<div class="countbox"><b id="cHard">0</b><span>hard</span></div>
+</div>
+<div class="banner" id="scopeNote"></div>
+<button id="confirmProfile">Yes, this is my profile</button>
+</div>
+</section>
+
+<section class="panel hidden" id="stage-company">
+<h2><b>2</b> Choose the company</h2>
+<div class="backrow"><button class="linklike" id="backToProfile" type="button">&larr; Back to profile</button></div>
+<p class="note" id="confirmedNote"></p>
+<label for="company">Company you are applying to</label>
+<input type="text" id="company" list="companyList" placeholder="e.g. Amazon" maxlength="120" autocomplete="off"><datalist id="companyList"></datalist>
+<p class="note">Built-in lists come from an MIT-licensed community compilation of company-tagged LeetCode questions. The source and its last-update date are shown on your sheet.</p>
+<button id="build">Build my practice sheet</button>
+<div class="orline">or use your own sheet</div>
+<p class="note">If you have your own company question list (CSV), you can use that instead. It stays yours - it is used once for this sheet and not stored.</p>
+<div class="uplrow"><input type="file" id="csvScan" accept=".csv,text/csv" aria-label="Your own company question sheet CSV"><button class="secondary" id="buildFromCsv">Build from my CSV</button></div>
+<div id="buildStatus" class="status"></div>
+</section>
+
+<section class="panel hidden" id="stage-results">
+<h2 id="sheetHead" tabindex="-1"><b>3</b> Your practice sheet</h2>
+<div class="backrow"><button class="linklike" id="backToCompany" type="button">&larr; Change company</button></div>
+<p class="provline" id="sheetBanner"></p>
+<div class="sheettools"><span class="chip" id="sheetSummary"></span><button class="secondary" id="downloadTxt">Download as .txt</button></div>
+<div id="sheetRows"></div>
+<div id="sheetStatus" class="status"></div>
+</section>
+<div class="pagefoot">Slate demo build.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+let token=()=>sessionStorage.getItem("slate_token")||"";
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function msg(id,text,error=false){$(id).textContent=text;$(id).className="status "+(error?"error":"")}
+let contextEpoch=0,busy=false,confirmedUsername=null,lastTxt=null,lastTxtName="slate-practice-sheet.txt",stage="profile";
+class StaleResponse extends Error{}
+function context(){return {epoch:contextEpoch,auth:token()}}
+function current(c){return c.epoch===contextEpoch&&c.auth===token()}
+function showStage(name,focusId){
+ stage=name;
+ for(const s of ["profile","company","results"]) $("stage-"+s).classList.toggle("hidden",s!==name),$("stage-"+s).classList.toggle("on",s===name);
+ if(focusId){const el=$(focusId);if(el)el.focus()}
+}
+function resetPractice(){
+ contextEpoch++;confirmedUsername=null;lastTxt=null;busy=false;
+ ["lookupStatus","buildStatus","sheetStatus"].forEach(id=>$(id).textContent="");
+ $("lcInput").value="";$("company").value="";$("foundList").innerHTML="";$("companyList").innerHTML="";$("confirmedNote").textContent="";
+ $("profileCard").classList.add("hidden");
+ showStage("profile");
+ ["lookup","scanSaved","scanPdf","build","buildFromCsv","downloadTxt","confirmProfile"].forEach(id=>$(id).disabled=false);
+}
+async function recoverSignIn(){sessionStorage.removeItem("slate_token");resetPractice();await initAuth();msg("authMessage","Sign-in expired. Sign in again; no action was retried.",true)}
+async function api(path,method="GET",body){
+ const c=context(),headers={};if(c.auth)headers.Authorization="Bearer "+c.auth;if(body!==undefined)headers["Content-Type"]="application/json";
+ let response,raw;
+ try{response=await fetch("/v1"+path,{method,headers,body:body!==undefined?JSON.stringify(body):undefined});raw=await response.text()}
+ catch(e){if(!current(c))throw new StaleResponse();throw new Error("Cannot reach Slate API. Check the connection and try again; nothing was automatically retried.")}
+ if(!current(c))throw new StaleResponse();
+ if(response.status===401){await recoverSignIn();throw new StaleResponse()}
+ let data={};if(raw){try{data=JSON.parse(raw)}catch(e){throw new Error("Slate API returned a non-JSON response (HTTP "+response.status+"). Check the server and retry deliberately.")}}
+ if(!response.ok)throw new Error(data.error?.message||"Request failed ("+response.status+")");return data;
+}
+async function apiUpload(path,file,fields){
+ const c=context(),headers={};if(c.auth)headers.Authorization="Bearer "+c.auth;
+ const form=new FormData();form.append("file",file);for(const k in (fields||{}))form.append(k,fields[k]);
+ let response,raw;
+ try{response=await fetch("/v1"+path,{method:"POST",headers,body:form});raw=await response.text()}
+ catch(e){if(!current(c))throw new StaleResponse();throw new Error("Cannot reach Slate API. Check the connection and try again; nothing was automatically retried.")}
+ if(!current(c))throw new StaleResponse();
+ if(response.status===401){await recoverSignIn();throw new StaleResponse()}
+ let data={};if(raw){try{data=JSON.parse(raw)}catch(e){throw new Error("Slate API returned a non-JSON response (HTTP "+response.status+").")}}
+ if(!response.ok)throw new Error(data.error?.message||"Request failed ("+response.status+")");return data;
+}
+async function onboardingGate(){
+ // First-login routing, fire-and-forget from signedIn so sign-in rendering
+ // stays synchronous: a brand-new account (no confirmed profile) is redirected
+ // to onboarding once (save or skip both end it). A bare fetch on purpose -
+ // the page's own api() would discard this response as stale when the
+ // post-sign-in reset advances the page epoch. UX guidance only; data access
+ // stays enforced per verified token on every API call.
+ // Failure handling: a 401 is owned by the page's own sign-in recovery, so
+ // leave it alone. Any other failure (network, 5xx) gets one retry; if it
+ // still fails the user stays in place rather than being guessed about - the
+ // gate re-runs on the next page load, so a new user is not silently passed
+ // for good. The token check after every await is the logout/re-sign-in
+ // guard: a stale answer never redirects.
+ const t=token();if(!t)return false;
+ for(let attempt=0;attempt<2;attempt++){
+  let r=null;
+  try{r=await fetch("/v1/profile",{headers:{authorization:"Bearer "+t}})}catch(e){r=null}
+  if(token()!==t)return true;
+  if(r){
+   if(r.status===401)return false;
+   if(r.ok){const p=await r.json();if(p.status==="not_started"){location.replace("/onboarding");return true}return false}
+  }
+  if(attempt===0)await new Promise(res=>setTimeout(res,1500));
+ }
+ return false
+}
+function signedIn(email){onboardingGate();resetPractice();$("authControls").innerHTML="Signed in as "+esc(email||"local user")+' <button class="secondary" id="signout">Sign out</button>';$("authMessage").textContent="";$("signout").onclick=async()=>{sessionStorage.removeItem("slate_token");resetPractice();await initAuth()}}
+async function initAuth(){
+ let cfg;try{cfg=await (await fetch("/v1/config")).json()}catch(e){msg("authControls","Cannot reach API.",true);return}
+ if(token()){signedIn();return}
+ if(cfg.mode==="dev"){
+  $("authControls").innerHTML='<input id="devEmail" placeholder="you@example.com"><button id="devSignIn">Sign in (local development)</button>';
+  $("devSignIn").onclick=()=>{const email=$("devEmail").value.trim();if(!email)return;sessionStorage.setItem("slate_token","dev:"+email);signedIn(email)}
+ }else if(cfg.mode==="google"){
+  $("authControls").innerHTML='<div id="googleButton"></div>';
+  const render=()=>google.accounts.id.initialize({client_id:cfg.googleClientId,callback:r=>{sessionStorage.setItem("slate_token",r.credential);signedIn()}}),button=()=>google.accounts.id.renderButton($("googleButton"),{theme:"outline",size:"large"});
+  const s=document.createElement("script");s.src="https://accounts.google.com/gsi/client";s.onload=()=>{render();button()};document.head.appendChild(s)
+ }else if(cfg.mode==="supabase"){
+  $("authControls").innerHTML='<button id="sbSignIn">Sign in with Google</button>';
+  const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";s.onload=()=>{const sb=supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);$("sbSignIn").onclick=()=>sb.auth.signInWithOAuth({provider:"google"})};document.head.appendChild(s)
+ }else{
+  msg("authControls","Sign-in is not configured. For local development set SLATE_DEV_AUTH=1 before starting Uvicorn.",true)
+ }
+}
+function offerUsername(name,source){
+ const b=document.createElement("button");b.className="chip foundchip";b.type="button";b.textContent=name+(source?" · "+source:"");
+ b.onclick=()=>{$("lcInput").value=name;$("lookup").click()};
+ return b;
+}
+$("scanSaved").onclick=async()=>{
+ if(busy)return;const c=context();busy=true;
+ try{$("scanSaved").disabled=true;msg("lookupStatus","Scanning your saved resumes…");
+  const data=await api("/practice/scan","POST",{});
+  $("foundList").innerHTML="";
+  if(!data.matches.length){msg("lookupStatus","No LeetCode link found in your saved resumes. Type the username or scan the resume PDF instead.");return}
+  msg("lookupStatus","Found these LeetCode profiles in your saved resumes - click one to look it up:");
+  for(const m of data.matches)for(const u of m.usernames)$("foundList").appendChild(offerUsername(u,m.name));
+ }catch(e){if(e instanceof StaleResponse)return;msg("lookupStatus",e.message,true)}
+ finally{if(current(c)){busy=false;$("scanSaved").disabled=false}}
+};
+$("scanPdf").onclick=async()=>{
+ if(busy)return;const c=context(),f=$("pdfScan").files[0];
+ if(!f){msg("lookupStatus","Choose a resume PDF first.",true);return}
+ busy=true;
+ try{$("scanPdf").disabled=true;msg("lookupStatus","Scanning the PDF, including links hidden behind names and icons…");
+  const data=await apiUpload("/practice/scan-pdf",f);
+  $("foundList").innerHTML="";
+  if(!data.usernames.length){msg("lookupStatus","No LeetCode link found in this PDF. Type the username instead.");return}
+  msg("lookupStatus","Found in the PDF - click to look it up:");
+  for(const u of data.usernames)$("foundList").appendChild(offerUsername(u));
+ }catch(e){if(e instanceof StaleResponse)return;msg("lookupStatus",e.message,true)}
+ finally{if(current(c)){busy=false;$("scanPdf").disabled=false}}
+};
+$("lookup").onclick=async()=>{
+ if(busy)return;const c=context();busy=true;
+ try{$("lookup").disabled=true;msg("lookupStatus","Looking up the public profile…");$("profileCard").classList.add("hidden");
+  const data=await api("/practice/profile","POST",{username:$("lcInput").value.trim()});
+  $("pName").textContent=data.username+(data.realName?" · "+data.realName:"");
+  $("pMeta").innerHTML='<a href="'+esc(data.profileUrl)+'" target="_blank" rel="noopener">'+esc(data.profileUrl)+'</a>'+(data.ranking?" · global rank #"+esc(data.ranking):"");
+  $("cAll").textContent=data.solved.all;$("cEasy").textContent=data.solved.easy;$("cMed").textContent=data.solved.medium;$("cHard").textContent=data.solved.hard;
+  $("scopeNote").textContent=data.scopeNote;
+  $("profileCard").classList.remove("hidden");msg("lookupStatus","");
+  $("confirmProfile").onclick=()=>{confirmedUsername=data.username;$("confirmedNote").textContent="Profile: "+confirmedUsername;showStage("company","company");msg("buildStatus","")};
+ }catch(e){if(e instanceof StaleResponse)return;msg("lookupStatus",e.message,true)}
+ finally{if(current(c)){busy=false;$("lookup").disabled=false}}
+};
+$("backToProfile").onclick=()=>showStage("profile","lcInput");
+$("backToCompany").onclick=()=>showStage("company","company");
+let companySuggestTimer=null;
+$("company").addEventListener("input",()=>{
+ const q=$("company").value.trim();clearTimeout(companySuggestTimer);
+ if(q.length<2){$("companyList").innerHTML="";return}
+ const c=context();
+ companySuggestTimer=setTimeout(async()=>{
+  try{const data=await api("/practice/companies?q="+encodeURIComponent(q));if(!current(c))return;$("companyList").innerHTML=data.companies.map(n=>"<option value=\""+esc(n)+"\">").join("")}catch(e){}
+ },200);
+});
+function renderSheet(data){
+ const prov=data.provenance;
+ $("sheetBanner").textContent="Statuses use only your public recent solves (max 20) - 'not in recent public solves' may still mean solved. Question data: "+prov.attribution+(prov.sourceUrl?" · "+prov.sourceUrl:"")+(prov.dataDate?" · source last updated "+prov.dataDate:"")+".";
+ $("sheetSummary").textContent="Showing "+data.sheet.shown+" of "+data.sheet.totalInList+" "+data.company+" questions · "+data.sheet.recentlySolvedShown+" confirmed in your recent public solves";
+ $("sheetRows").innerHTML="";
+ for(let i=0;i<data.sheet.rows.length;i++){
+  const r=data.sheet.rows[i],row=document.createElement("div");row.className="qrow";
+  const recent=r.status==="recently_solved";
+  row.innerHTML='<span class="qnum">'+(i+1)+'</span><div class="qmain"><a class="qtitle" href="'+esc(r.link)+'" target="_blank" rel="noopener">'+esc(r.title)+'</a>'+(r.difficulty?'<span class="dtag">'+esc(r.difficulty)+'</span>':"")+'<div class="qsub">occurrences '+esc((+r.frequency).toFixed(1).replace(/\.0$/,""))+(r.topics?" · "+esc(r.topics):"")+"</div></div>"+
+   '<span class="qstat '+(recent?"recent":"unknown")+'">'+(recent?"Recently solved"+(r.solvedDate?" · "+esc(r.solvedDate):""):"Not in recent public solves")+"</span>";
+  $("sheetRows").appendChild(row);
+ }
+ lastTxt=data.txt;lastTxtName="slate-practice-"+data.company.toLowerCase().replace(/[^a-z0-9]+/g,"-")+".txt";
+ showStage("results","sheetHead");
+}
+$("build").onclick=async()=>{
+ if(busy)return;const c=context();busy=true;
+ try{$("build").disabled=true;msg("buildStatus","Building your sheet…");
+  const data=await api("/practice/sheet","POST",{username:confirmedUsername||$("lcInput").value.trim(),company:$("company").value.trim()});
+  renderSheet(data);msg("buildStatus","");
+ }catch(e){if(e instanceof StaleResponse)return;msg("buildStatus",e.message,true)}
+ finally{if(current(c)){busy=false;$("build").disabled=false}}
+};
+$("buildFromCsv").onclick=async()=>{
+ if(busy)return;const c=context(),f=$("csvScan").files[0];
+ if(!f){msg("buildStatus","Choose your CSV first.",true);return}
+ busy=true;
+ try{$("buildFromCsv").disabled=true;msg("buildStatus","Building your sheet from your CSV…");
+  const data=await apiUpload("/practice/sheet-from-csv",f,{username:confirmedUsername||$("lcInput").value.trim(),company:$("company").value.trim()});
+  renderSheet(data);msg("buildStatus","");
+ }catch(e){if(e instanceof StaleResponse)return;msg("buildStatus",e.message,true)}
+ finally{if(current(c)){busy=false;$("buildFromCsv").disabled=false}}
+};
+$("downloadTxt").onclick=()=>{
+ if(!lastTxt)return;
+ const blob=new Blob([lastTxt],{type:"text/plain"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=lastTxtName;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+};
+initAuth();
+</script>
+<script>
+(()=>{const t=$("theme-toggle");const apply=()=>{const d=document.documentElement.dataset.theme==="dark";t.textContent=d?"Light mode":"Dark mode";t.setAttribute("aria-label",d?"Switch to light mode":"Switch to dark mode")};t.onclick=()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==="dark"?"light":"dark";try{localStorage.setItem("slate_theme",document.documentElement.dataset.theme)}catch(_){}apply()};apply()})();
+</script>
+</body></html>
